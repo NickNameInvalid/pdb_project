@@ -1,9 +1,9 @@
 use project;
 
+drop table if exists Likes CASCADE;
 drop table if exists Answers CASCADE;
 drop table if exists Questions CASCADE;
 drop table if exists SubjectTopics CASCADE;
-drop table if exists Likes CASCADE;
 drop table if exists Users CASCADE;
 drop table if exists GeneralTopics CASCADE;
 
@@ -55,7 +55,6 @@ CREATE TABLE Questions (
 CREATE TABLE Answers (
   aid INT NOT NULL,
   qid INT NOT NULL,
-  a_index INT NOT NULL,
   answer_time DATETIME NOT NULL,
   a_username VARCHAR(45) NOT NULL,
   body VARCHAR(100) NOT NULL,
