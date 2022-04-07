@@ -44,48 +44,48 @@ values ('Music');
 insert into SubjectTopics (stname, gtid)
 values ('Database Systems', 1);
 
-insert into SubjectTopucs (stname, gtid)
+insert into SubjectTopics (stname, gtid)
 values ('Computer Vision', 1);
 
-insert into SubjectTopucs (stname, gtid)
+insert into SubjectTopics (stname, gtid)
 values ('Natural Language Processing', 1);
 
-insert into SubjectTopucs (stname, gtid)
+insert into SubjectTopics (stname, gtid)
 values ('Astrophysics', 2);
 
-insert into SubjectTopucs (stname, gtid)
+insert into SubjectTopics (stname, gtid)
 values ('Fusion and Plasma Physics', 2);
 
-insert into SubjectTopucs (stname, gtid)
+insert into SubjectTopics (stname, gtid)
 values ('Nanoscience and Nanotechnology', 2);
 
-insert into SubjectTopucs (stname, gtid)
+insert into SubjectTopics (stname, gtid)
 values ('Algebra', 3);
 
-insert into SubjectTopucs (stname, gtid)
+insert into SubjectTopics (stname, gtid)
 values ('Combinatorics', 3);
 
-insert into SubjectTopucs (stname, gtid)
+insert into SubjectTopics (stname, gtid)
 values ('Topology and Differential Geometry', 3);
 
-insert into SubjectTopucs (stname, gtid)
+insert into SubjectTopics (stname, gtid)
 values ('Civil rights', 4);
 
-insert into SubjectTopucs (stname, gtid)
+insert into SubjectTopics (stname, gtid)
 values ('Assisted suicide', 4);
 
-insert into SubjectTopucs (stname, gtid)
+insert into SubjectTopics (stname, gtid)
 values ('Capital punishmen', 4);
 
-insert into SubjectTopucs (stname, gtid)
+insert into SubjectTopics (stname, gtid)
 values ('Composition', 5);
 
-insert into SubjectTopucs (stname, gtid)
+insert into SubjectTopics (stname, gtid)
 values ('Songwriting', 5);
 
-insert into SubjectTopucs (stname, gtid)
+insert into SubjectTopics (stname, gtid)
 values ('Performance', 5);
 
-insert into SubjectTopucs (stname, gtid)
+insert into SubjectTopics (stname, gtid)
 values ('Film Scoring', 5);
 
