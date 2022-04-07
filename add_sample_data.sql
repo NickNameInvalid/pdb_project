@@ -41,7 +41,7 @@ insert into GeneralTopics (gtname)
 values ('Music');
 
 
-insert into SubjectTopucs (stname, gtid)
+insert into SubjectTopics (stname, gtid)
 values ('Database Systems', 1);
 
 insert into SubjectTopucs (stname, gtid)
