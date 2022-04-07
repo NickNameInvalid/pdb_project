@@ -21,49 +21,49 @@ values ('user6', 'user6@mail.com', 'be4b60459be9466dcaa973314cec00a3b97c2e481ba5
 insert into Questions (q_username, stid, title, body, post_time, status, best_answer) 
 values ('user1', 1, 'How to use select in mysql', 'As title stated, how to use it? I am a rookie of DB sytem.', '2021-09-01 15:21:02', 'unsolved', NULL);
 
-insert into Questions (q_username, gtid, stid, title, body, post_time, status, best_answer)
+insert into Questions (q_username, stid, title, body, post_time, status, best_answer)
 values ('user1', 2, 'Good image datasets', 'Can anyone recommend some good datasets for my model?', '2020-01-03 00:05:03', 'resolved', 1);
 
-insert into Questions (q_username, gtid, stid, title, body, post_time, status, best_answer)
+insert into Questions (q_username, stid, title, body, post_time, status, best_answer)
 values ('user2', 3, 'Some BERT familiy members', 'New starter for NLP, heard BERT is awesome, introduce it for me pls!', '2020-08-02 13:05:03', 'resolved', 2);
 
-insert into Questions (q_username, gtid, stid, title, body, post_time, status, best_answer)
+insert into Questions (q_username, stid, title, body, post_time, status, best_answer)
 values ('user2', 4, 'What is a blackhole?', 'As title stated', '2021-02-02 14:02:08', 'resolved', NULL);
 
-insert into Questions (q_username, gtid, stid, title, body, post_time, status, best_answer)
+insert into Questions (q_username, stid, title, body, post_time, status, best_answer)
 values ('user2', 5, 'Can anyone explain what is superconductivity?', 'I am interested in this topic hence I wonder can anyone answer my question?', '2021-03-02 12:02:08', 'resolved', 1);
 
-insert into Questions (q_username, gtid, stid, title, body, post_time, status, best_answer)
+insert into Questions (q_username, stid, title, body, post_time, status, best_answer)
 values ('user1', 6, 'Some materials with nanoscience?', 'Can anyone take some examples for me with materials with nanoscience techniques?', '2019-02-01 19:02:02', 'resolved', NULL);
 
-insert into Questions (q_username, gtid, stid, title, body, post_time, status, best_answer)
+insert into Questions (q_username, stid, title, body, post_time, status, best_answer)
 values ('user3', 7, 'solve x + 1 = 2', 'Please solve the algebra problem for me!', '2021-11-03 05:01:25', 'resolved', 1);
 
-insert into Questions (q_username, gtid, stid, title, body, post_time, status, best_answer)
+insert into Questions (q_username, stid, title, body, post_time, status, best_answer)
 values ('user3', 8, 'sufficient condition', 'What is sufficient condition?', '2022-01-04 02:01:26', 'resolved', NULL);
 
-insert into Questions (q_username, gtid, stid, title, body, post_time, status, best_answer)
+insert into Questions (q_username, stid, title, body, post_time, status, best_answer)
 values ('user3', 9, 'Seven Bridges of Konigsberg', 'What is this?', '2022-01-05 04:02:26', 'unsolved', NULL);
 
-insert into Questions (q_username, gtid, stid, title, body, post_time, status, best_answer)
+insert into Questions (q_username, stid, title, body, post_time, status, best_answer)
 values ('user4', 10, 'Universal Declaration of Human Rights', 'When was it published?', '2022-03-15 04:06:40', 'resolved', 1);
 
-insert into Questions (q_username, gtid, stid, title, body, post_time, status, best_answer)
+insert into Questions (q_username, stid, title, body, post_time, status, best_answer)
 values ('user4', 11, 'suicide', 'Some examples for Assisted suicide?', '2021-03-15 17:16:20', 'resolved', 1);
 
-insert into Questions (q_username, gtid, stid, title, body, post_time, status, best_answer)
+insert into Questions (q_username, stid, title, body, post_time, status, best_answer)
 values ('user4', 12, 'I am terrified', 'I stole some money, will I be sentenced to death penalty?', '2020-01-15 12:16:21', 'unsolved', NULL);
 
-insert into Questions (q_username, gtid, stid, title, body, post_time, status, best_answer)
+insert into Questions (q_username, stid, title, body, post_time, status, best_answer)
 values ('user5', 13, 'great composer', 'I am preparing for my music exam, could you please give me the names of some great composers?', '2020-11-15 12:13:20', 'resolved', 1);
 
-insert into Questions (q_username, gtid, stid, title, body, post_time, status, best_answer)
+insert into Questions (q_username, stid, title, body, post_time, status, best_answer)
 values ('user5', 14, 'how to become good song writter', 'As title stated.', '2020-01-17 12:13:20', 'resolved', 1);
 
-insert into Questions (q_username, gtid, stid, title, body, post_time, status, best_answer)
+insert into Questions (q_username, stid, title, body, post_time, status, best_answer)
 values ('user6', 15, 'movie with great performance', 'I am looking for some movies best in performance', '2019-12-25 19:11:34', 'unsolved', NULL);
 
-insert into Questions (q_username, gtid, stid, title, body, post_time, status, best_answer)
+insert into Questions (q_username, stid, title, body, post_time, status, best_answer)
 values ('user6', 16, 'Good film music', 'Could you please provide me with some classic music from films', '2022-04-03 12:14:24', 'resolved', NULL);
 
 
