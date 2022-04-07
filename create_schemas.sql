@@ -39,7 +39,6 @@ CREATE TABLE SubjectTopics (
 CREATE TABLE Questions (
   qid INT NOT NULL AUTO_INCREMENT,
   q_username VARCHAR(45) NOT NULL,
-  gtid INT NOT NULL,
   stid INT NOT NULL,
   title VARCHAR(45) NOT NULL,
   body VARCHAR(512) NULL,
@@ -48,7 +47,6 @@ CREATE TABLE Questions (
   best_answer INT default NULL, 
   PRIMARY KEY (qid),
   FOREIGN KEY (q_username) REFERENCES Users(username),
-  FOREIGN KEY (gtid) REFERENCES GeneralTopics(gtid),
   FOREIGN KEY (stid) REFERENCES SubjectTopics(stid)
 );
 
