@@ -1,10 +1,11 @@
 use project;
 
+drop table if exists Answers CASCADE;
+drop table if exists Questions CASCADE;
+drop table if exists SubjectTopics CASCADE;
+drop table if exists Likes CASCADE;
 drop table if exists Users CASCADE;
 drop table if exists GeneralTopics CASCADE;
-drop table if exists Questions CASCADE;
-drop table if exists Answers CASCADE;
-drop table if exists SubjectTopics CASCADE;
 
 CREATE TABLE Users (
   username VARCHAR(45) NOT NULL,
@@ -44,9 +45,7 @@ CREATE TABLE Questions (
   body VARCHAR(512) NULL,
   post_time DATETIME NOT NULL,
   status VARCHAR(15) NOT NULL,
-  q_thumb_ups INT NOT NULL,
-  q_thumb_downs INT NOT NULL,
-  best_answer INT NULL, 
+  best_answer INT default NULL, 
   PRIMARY KEY (qid),
   FOREIGN KEY (q_username) REFERENCES Users(username),
   FOREIGN KEY (gtid) REFERENCES GeneralTopics(gtid),
@@ -54,14 +53,22 @@ CREATE TABLE Questions (
 );
 
 CREATE TABLE Answers (
+  aid INT NOT NULL,
   qid INT NOT NULL,
   a_index INT NOT NULL,
   answer_time DATETIME NOT NULL,
   a_username VARCHAR(45) NOT NULL,
   body VARCHAR(100) NOT NULL,
   a_thumb_ups INT NOT NULL,
-  a_thumb_downs INT NOT NULL,
-  PRIMARY KEY (qid, a_index),
+  PRIMARY KEY (aid),
   FOREIGN KEY (qid) REFERENCES Questions(qid),
   FOREIGN KEY (a_username) REFERENCES Users (username)
+);
+
+CREATE TABLE Likes (
+  username VARCHAR(45) NOT NULL,
+  aid INT NOT NULL,
+  PRIMARY KEY (username, aid),
+  FOREIGN KEY (username) REFERENCES Users (username),
+  FOREIGN KEY (aid) REFERENCES Answers (aid)
 );
