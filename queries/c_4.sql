@@ -1,0 +1,1 @@
+select aid, answer_time, a_body, best_answer from Questions natural join Answers where qid = 7 order by answer_time desc
