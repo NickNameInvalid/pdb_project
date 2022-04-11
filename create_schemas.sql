@@ -75,6 +75,7 @@ CREATE TABLE Answers (
 CREATE TABLE Likes (
   username VARCHAR(45) NOT NULL,
   aid INT NOT NULL,
+  like_status INT NOT NULL default 1,
   PRIMARY KEY (username, aid),
   FOREIGN KEY (username) REFERENCES Users (username),
   FOREIGN KEY (aid) REFERENCES Answers (aid)
