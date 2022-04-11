@@ -27,6 +27,7 @@ insert into GeneralTopics (gtname) values ('Physics');
 insert into GeneralTopics (gtname) values ('Math');
 insert into GeneralTopics (gtname) values ('Law');
 insert into GeneralTopics (gtname) values ('Music');
+insert into GeneralTopics (gtname) values ('Business');
 
 insert into SubjectTopics (stname, gtid) values ('Database Systems', 1); -- 1
 insert into SubjectTopics (stname, gtid) values ('Computer Vision', 1); -- 2
@@ -44,6 +45,7 @@ insert into SubjectTopics (stname, gtid) values ('Composition', 5); -- 13
 insert into SubjectTopics (stname, gtid) values ('Songwriting', 5); -- 14
 insert into SubjectTopics (stname, gtid) values ('Performance', 5); -- 15
 insert into SubjectTopics (stname, gtid) values ('Film Scoring', 5); -- 16
+insert into SubjectTopics (stname, gtid) values ('Programming Languages', 1); -- 17
 
 insert into Questions (q_username, stid, title, q_body, post_time, status) 
 values ('user1', 1, 'How to use select in mysql', 'As title stated, how to use it? I am a rookie of DB sytem.', '2021-09-01 15:21:02', 'unsolved');

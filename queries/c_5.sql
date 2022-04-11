@@ -1,16 +1,15 @@
-select GeneralTopics.gtid, s.stid, s.q_c, s.a_c
+select GeneralTopics.gtid, s.stid, s.question_count, s.answer_count
 from GeneralTopics left join (
-	select SubjectTopics.gtid as gtid, SubjectTopics.stid as stid, q_c, a_c
+	select SubjectTopics.gtid, SubjectTopics.stid, question_count, answer_count
 	from SubjectTopics left join (
-		select q.stid as stid, q_c, a_c
+		select q.stid, question_count, answer_count
 		from (
-			select stid, count(*) as q_c
+			select stid, count(*) as question_count
 			from Questions
 			group by stid
 		) as q left join (
-			select stid, count(*) as a_c
-			from Questions join Answers
-			on Questions.qid = Answers.qid
+			select stid, count(*) as answer_count
+			from Questions natural join Answers
 			group by stid
 		) as a 
 		on q.stid = a.stid

@@ -1,16 +1,15 @@
-select qid, title, body
+select qid, title, q_body
 from Questions
-where stid = 1 and title like '%a%'
+where title like '%how to%'
 
 union
 
-select qid, title, body
+select qid, title, q_body
 from Questions
-where stid = 1 and body like '%a%'
+where q_body like '%how to%'
 
 union 
 
-select Questions.qid, title, Questions.body
-from Questions join Answers
-on Questions.qid = Answers.qid
-where stid = 1 and Answers.body like '%a%'
+select Questions.qid, title, Questions.q_body
+from Questions natural join Answers
+where Answers.a_body like '%how to%'
