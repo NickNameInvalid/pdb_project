@@ -51,12 +51,12 @@ CREATE TABLE Questions (
 );
 
 CREATE TABLE Answers (
-  aid INT NOT NULL,
+  aid INT NOT NULL AUTO_INCREMENT,
   qid INT NOT NULL,
   answer_time DATETIME NOT NULL,
   a_username VARCHAR(45) NOT NULL,
   body VARCHAR(100) NOT NULL,
-  a_thumb_ups INT NOT NULL,
+  thumb_ups INT NOT NULL,
   PRIMARY KEY (aid),
   FOREIGN KEY (qid) REFERENCES Questions(qid),
   FOREIGN KEY (a_username) REFERENCES Users (username)
