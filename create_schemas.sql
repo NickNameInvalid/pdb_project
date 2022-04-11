@@ -6,6 +6,14 @@ drop table if exists Questions CASCADE;
 drop table if exists SubjectTopics CASCADE;
 drop table if exists Users CASCADE;
 drop table if exists GeneralTopics CASCADE;
+drop table if exists Status CASCADE;
+
+CREATE TABLE Status (
+  statusid INT AUTO_INCREMENT,
+  statusname VARCHAR(20) NOT NULL,
+  statuskarma INT NOT NULL,
+  PRIMARY KEY (statusid)
+);
 
 CREATE TABLE Users (
   username VARCHAR(45) NOT NULL,
@@ -19,7 +27,9 @@ CREATE TABLE Users (
   country VARCHAR(60) NULL,
   profile VARCHAR(512) NULL,
   karma_points INT NOT NULL,
-  PRIMARY KEY (username)
+  statusid INT NOT NULL,
+  PRIMARY KEY (username),
+  FOREIGN KEY (statusid) REFERENCES STATUS (statusid)
 );
 
 CREATE TABLE GeneralTopics (
@@ -44,7 +54,6 @@ CREATE TABLE Questions (
   body VARCHAR(512) NULL,
   post_time DATETIME NOT NULL,
   status VARCHAR(15) NOT NULL,
-  best_answer INT default NULL, 
   PRIMARY KEY (qid),
   FOREIGN KEY (q_username) REFERENCES Users(username),
   FOREIGN KEY (stid) REFERENCES SubjectTopics(stid)
@@ -57,6 +66,7 @@ CREATE TABLE Answers (
   a_username VARCHAR(45) NOT NULL,
   body VARCHAR(100) NOT NULL,
   thumb_ups INT NOT NULL,
+  best_answer INT NOT NULL default 0,
   PRIMARY KEY (aid),
   FOREIGN KEY (qid) REFERENCES Questions(qid),
   FOREIGN KEY (a_username) REFERENCES Users (username)
