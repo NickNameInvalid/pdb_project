@@ -5,7 +5,7 @@ case
   else 'expert'
   end as status
 from (select username, sum(score) as karma_points from (
-	select users.username, 10 * count(*) as score from users left join answers on answers.a_username = users.username inner join likes on likes.aid = answers.aid group by users.username
+	select users.username, 10 * count(*) as score from users left join answers on answers.a_username = users.username inner join likes on likes.aid = answers.aid where likes.like_status = 1 group by users.username
 	union all
     select username, 20 * count(*) as score from users left join answers on answers.a_username = users.username where best_answer = 1 group by username
     union all
