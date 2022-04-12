@@ -27,9 +27,7 @@ CREATE TABLE Users (
   country VARCHAR(60) NULL,
   profile VARCHAR(512) NULL,
   karma_points INT NOT NULL,
-  statusid INT NOT NULL,
-  PRIMARY KEY (username),
-  FOREIGN KEY (statusid) REFERENCES STATUS (statusid)
+  PRIMARY KEY (username)
 );
 
 CREATE TABLE GeneralTopics (
