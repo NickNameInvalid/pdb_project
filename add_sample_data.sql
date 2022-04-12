@@ -1,8 +1,8 @@
 use project;
 
 insert into Status (statusname, statuskarma) values ('basic', 0);
-insert into Status (statusname, statuskarma) values ('advanced', 5);
-insert into Status (statusname, statuskarma) values ('expert', 10);
+insert into Status (statusname, statuskarma) values ('advanced', 50);
+insert into Status (statusname, statuskarma) values ('expert', 100);
 
 insert into Users (username, email, password, firstname, lastname, phone, city, state, country, profile, karma_points, statusid)
 values ('user1', 'user1@mail.com', '42aff45bcfef506acda841c4c751a5e82376dc5e6b81d317aeafc4853eb4b768', 'f1', 'l1', '1112223333', 'New York', 'NY', 'USA', 'profile1', 50, 2);
