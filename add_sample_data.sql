@@ -22,6 +22,13 @@ values ('user5', 'user5@mail.com', '64532608c19ae7a92a1cd9fb4f38dd29671955e0cc72
 insert into Users (username, email, password, firstname, lastname, phone, city, state, country, profile, karma_points)
 values ('user6', 'user6@mail.com', 'be4b60459be9466dcaa973314cec00a3b97c2e481ba51f613cecd3b7cafc170f', 'f6', 'l6', '6667778888', 'Los Angles', 'CA', 'USA', 'profile6', 10);
 
+insert into UserStatus (username, statusid) values ('user1', 2);
+insert into UserStatus (username, statusid) values ('user2', 2);
+insert into UserStatus (username, statusid) values ('user3', 3);
+insert into UserStatus (username, statusid) values ('user4', 2);
+insert into UserStatus (username, statusid) values ('user5', 2);
+insert into UserStatus (username, statusid) values ('user6', 1);
+
 insert into GeneralTopics (gtname) values ('Computer Science');
 insert into GeneralTopics (gtname) values ('Physics');
 insert into GeneralTopics (gtname) values ('Math');

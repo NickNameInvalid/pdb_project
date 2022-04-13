@@ -4,9 +4,10 @@ drop table if exists Likes CASCADE;
 drop table if exists Answers CASCADE;
 drop table if exists Questions CASCADE;
 drop table if exists SubjectTopics CASCADE;
+drop table if exists UserStatus CASCADE;
+drop table if exists Status CASCADE;
 drop table if exists Users CASCADE;
 drop table if exists GeneralTopics CASCADE;
-drop table if exists Status CASCADE;
 
 CREATE TABLE Status (
   statusid INT AUTO_INCREMENT,
@@ -28,6 +29,14 @@ CREATE TABLE Users (
   profile VARCHAR(512) NULL,
   karma_points INT NOT NULL,
   PRIMARY KEY (username)
+);
+
+CREATE TABLE UserStatus (
+  username VARCHAR(45) NOT NULL,
+  statusid INT NOT NULL default 1,
+  PRIMARY KEY (username),
+  FOREIGN KEY (username) REFERENCES Users(username),
+  FOREIGN KEY (statusid) REFERENCES Status(statusid)
 );
 
 CREATE TABLE GeneralTopics (
