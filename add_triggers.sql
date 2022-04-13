@@ -1,4 +1,10 @@
 use project;
+drop trigger if exists Likes_after_insert;
+drop trigger if exists Likes_after_update;
+drop trigger if exists Answers_after_update;
+drop trigger if exists Answers_after_insert;
+drop trigger if exists User_after_update;
+
 delimiter //
 
 -- for Likes
@@ -52,17 +58,25 @@ end;//
 -- for Users
 create trigger User_after_update after update on Users for each row
 begin
-	if new.karma_points >= 100 and old.karma_points < 100 then 
+	declare advance_thres INT;
+	declare expert_thres INT;
+    declare basic_status INT;
+	declare acvanced_status INT;
+	declare expert_status INT;
+	select statusid into basic_status from status where statusname = 'basic';
+	select statuskarma, statusid into advance_thres, acvanced_status from status where statusname = 'advanced';
+	select statuskarma, statusid into expert_thres, expert_status from status where statusname = 'expert';
+	if new.karma_points >= expert_thres and old.karma_points < expert_thres then 
 		update UserStatus
-        set statusid = 3
+        set statusid = expert_status
         where UserStatus.username = new.username;
-	elseif new.karma_points >= 50 and (old.karma_points < 50 or old.karma_points >= 100) then
+	elseif new.karma_points >= advance_thres and (old.karma_points < advance_thres or old.karma_points >= expert_thres) then
 		update UserStatus
-        set statusid = 2
+        set statusid = acvanced_status
         where UserStatus.username = new.username;
-	elseif new.karma_points < 50 and old.karma_points >= 50 then
+	elseif new.karma_points < advance_thres and old.karma_points >= advance_thres then
 		update UserStatus
-        set statusid = 1
+        set statusid = basic_status
         where UserStatus.username = new.username;
 	end if;
 end;//
