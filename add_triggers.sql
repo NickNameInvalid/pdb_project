@@ -42,15 +42,10 @@ begin
 		update Users
         set karma_points = karma_points + 20
         where Users.username = new.a_username;
-		if exists(select * from Answers where best_answer = 1 and qid = new.qid and aid <> new.aid) then
-			update Answers
-			set best_answer = 0
-            where Answers.qid = new.qid and Answers.aid <> new.aid;
-		end if;
 	elseif new.best_answer = 0 and old.best_answer = 1 then
 		update Users
         set karma_points = karma_points - 20
-        where User.username = new.a_username;
+        where Users.username = new.a_username;
 	end if;
     
     if new.thumb_ups - old.thumb_ups <> 0 then
