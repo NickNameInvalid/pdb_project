@@ -61,6 +61,7 @@ CREATE TABLE Questions (
   q_body VARCHAR(512) NULL,
   post_time DATETIME NOT NULL,
   status VARCHAR(15) NOT NULL,
+  q_visible_status INT NOT NULL default 1,
   PRIMARY KEY (qid),
   FOREIGN KEY (q_username) REFERENCES Users(username),
   FOREIGN KEY (stid) REFERENCES SubjectTopics(stid)
@@ -74,6 +75,7 @@ CREATE TABLE Answers (
   a_body VARCHAR(100) NOT NULL,
   thumb_ups INT NOT NULL,
   best_answer INT NOT NULL default 0,
+  a_visible_status INT NOT NULL default 1,
   PRIMARY KEY (aid),
   FOREIGN KEY (qid) REFERENCES Questions(qid),
   FOREIGN KEY (a_username) REFERENCES Users (username)
