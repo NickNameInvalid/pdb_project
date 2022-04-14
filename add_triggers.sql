@@ -4,6 +4,7 @@ drop trigger if exists Likes_after_update;
 drop trigger if exists Answers_after_update;
 drop trigger if exists Answers_after_insert;
 drop trigger if exists User_after_update;
+drop trigger if exists User_after_insert;
 
 delimiter //
 
@@ -60,6 +61,11 @@ begin
 end;//
 
 -- for Users
+create trigger User_after_insert after insert on Users for each row
+begin
+	insert into UserStatus(username) values(new.username);
+end;//
+
 create trigger User_after_update after update on Users for each row
 begin
 	declare advance_thres INT;
