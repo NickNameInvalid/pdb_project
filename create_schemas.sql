@@ -18,7 +18,7 @@ CREATE TABLE Status (
 
 CREATE TABLE Users (
   username VARCHAR(45) NOT NULL,
-  email VARCHAR(50) NOT NULL,
+  email VARCHAR(50),
   password VARCHAR(128) NOT NULL,
   firstname VARCHAR(45) NOT NULL,
   lastname VARCHAR(45) NOT NULL,
