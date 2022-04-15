@@ -51,12 +51,12 @@ begin
 			set karma_points = karma_points - 20
 			where Users.username = new.a_username;
 		end if;
+	end if;
 		
-		if new.thumb_ups - old.thumb_ups <> 0 then
-			update Users
-			set karma_points = karma_points + 10 * (new.thumb_ups - old.thumb_ups)
-			where Users.username = new.a_username;
-		end if;
+	if new.thumb_ups - old.thumb_ups <> 0 then
+		update Users
+		set karma_points = karma_points + 10 * (new.thumb_ups - old.thumb_ups)
+		where Users.username = new.a_username;
 	end if;
 end;//
 
