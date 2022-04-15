@@ -1,4 +1,4 @@
-select GeneralTopics.gtid, IFNULL(s.stid, 0) as stid, IFNULL(s.question_count, 0) as question_count, IFNULL(s.answer_count, 0) as answer_count
+select GeneralTopics.gtid, stid as stid, IFNULL(s.question_count, 0) as question_count, IFNULL(s.answer_count, 0) as answer_count
 from GeneralTopics left join (
 	select SubjectTopics.gtid, SubjectTopics.stid, question_count, answer_count
 	from SubjectTopics left join (
