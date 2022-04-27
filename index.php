@@ -27,6 +27,7 @@ $mysqli->close();
         $("#g_topic_receiver").load('public/login.html');
     });
 
+
 </script>
 
 </html>
