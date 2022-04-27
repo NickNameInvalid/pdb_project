@@ -1,8 +1,15 @@
 <?php
 session_start();
+//error_reporting(0);
 include('mysqlidb.php');
 $mysqli = establish_conn();
 $user = $_POST['login_user'];
+if(isset($_SESSION['login']))
+{
+    echo "You've already login!";
+    return;
+}
+
 $pass = hash('sha256', $_POST['login_pass']);
 $user_check = $mysqli->prepare("select password from users where username = ?");
 $user_check -> bind_param("s", $user);
