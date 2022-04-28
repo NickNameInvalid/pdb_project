@@ -28,7 +28,6 @@ if($password_hash == $pass)
 {
     echo "Success!";
     $_SESSION['username'] = $user;
-    $_SESSION['login'] = True;
 }
 else
 {
