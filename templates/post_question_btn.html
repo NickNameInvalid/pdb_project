@@ -68,6 +68,29 @@
         });
     })
 
+    $('#post_g_sel').on("change", function (){
+        var object = document.getElementById('post_g_sel');
+        var selected = object.options[object.selectedIndex].value;
+        if(String(selected) !== String("General Topics"))
+        {
+            $('#post_s_sel').removeAttr('disabled');
+            $.ajax({
+                url: "../application/get_subject_topics.php",
+                type: "post",
+                data: {"gtid": object.options[object.selectedIndex].id.replace('gtid_', '')},
+                success: function (data) {
+                    $("#post_s_sel").html(data);
+                },
+                error: function (data){
+                    console.warn(data);
+                }
+            });
+        }
+        else
+        {
+            $('#post_s_sel').attr('disabled', 'disabled');
+        }
+    })
 
 
 </script>
