@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="framework/core/jquery-3.6.0.min.js"></script>
+    <script src="framework/jquery/jquery-3.6.0.min.js"></script>
     <title>Title</title>
 </head>
 <body>
