@@ -27,7 +27,7 @@
                 <li>
                     <select class="form-select" aria-label="select_topics" id="s_topic_sel">
                         <option selected>Subject Topics</option>
-                        <option value=1>Test</option>
+                        <option>Test</option>
                     </select>
                 </li>
 
@@ -69,6 +69,10 @@
 
     $("#user_profile").click(function () {
         $(location).attr("href", "profile_url")
+    })
+
+    $("#g_topic_sel").ready(function (){
+        $("#g_topic_sel").append("<option>Test2</option>");
     })
 </script>
 
