@@ -31,18 +31,25 @@
                     </select>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="search_mode_sel" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">Search Mode</a>
-
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Test</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Default Search</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                <li>
+                    <select class="form-select" aria-label="select_topics" id="search_mode_sel">
+                        <option selected>Default Search</option>
+                        <option>Fulltext Search</option>
+                    </select>
                 </li>
+
+<!--                <li class="nav-item dropdown">-->
+<!--                    <a class="nav-link dropdown-toggle" href="#" id="search_mode_sel" role="button"-->
+<!--                       data-bs-toggle="dropdown" aria-expanded="false">Search Mode</a>-->
+
+<!--                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<!--                        <li><a class="dropdown-item" href="#">Test</a>-->
+<!--                            <ul class="dropdown-menu">-->
+<!--                                <li><a href="#">Default Search</a></li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </li>-->
 
                 <li>
                     <form class="d-flex">
@@ -74,6 +81,7 @@
     $("#g_topic_sel").ready(function (){
         $("#g_topic_sel").append("<option>Test2</option>");
     })
+
 </script>
 
 </html>
