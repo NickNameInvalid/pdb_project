@@ -16,7 +16,6 @@ if($pword1 === $pword2)
     catch (mysqli_sql_exception $e)
     {
         echo "account already exists!";
-
     } finally {
        $mysqli->close();
     }
