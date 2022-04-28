@@ -4,7 +4,7 @@ session_start();
 include('mysqlidb.php');
 $mysqli = establish_conn();
 $user = $_POST['login_user'];
-if(isset($_SESSION['login']))
+if(isset($_SESSION['username']))
 {
     echo "You've already login!";
     return;
