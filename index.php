@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="framework/jquery/jquery-3.6.0.min.js"></script>
+    <script src="framework/jquery-3.6.0/jquery-3.6.0.min.js"></script>
     <title>Title</title>
 </head>
 <body>
@@ -24,7 +24,7 @@ $mysqli->close();
 
 <script type="text/javascript">
     $(document).ready(function (){
-        $("#g_topic_receiver").load('public/login.html');
+        $("#g_topic_receiver").load('templates/login.html');
     });
 
 
