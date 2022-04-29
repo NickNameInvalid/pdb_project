@@ -35,5 +35,5 @@ else
 }
 
 $mysqli->close();
-$sql->close();
+$user_check->close();
 ?>
