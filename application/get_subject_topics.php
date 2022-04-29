@@ -6,7 +6,7 @@ $stmt = $mysqli->prepare("select concat('stid_', stid) as stid, stname from subj
 $stmt->bind_param("i", $gtid);
 $stmt -> execute();
 $stmt->bind_result($stid, $stname);
-echo "<option selected>Subject Topics</option>";
+echo "<option id='stid_dft' selected>Subject Topics</option>";
 while ($stmt->fetch())
 {
     echo <<<heredoc
