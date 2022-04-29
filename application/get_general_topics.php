@@ -9,7 +9,7 @@ echo "<option selected>General Topics</option>";
 while ($stmt->fetch())
 {
     echo <<<heredoc
-        <option id="$gtid">$gtname</option>
+        <option class="$gtid">$gtname</option>
     heredoc;
 }
 $stmt->close();

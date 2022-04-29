@@ -37,7 +37,7 @@
             <div class="d-flex gap-3" style="padding-left: 20px">
                 <select id="post_g_sel" class="post-sel"></select>
                 <select id="post_s_sel" class="post-sel" disabled>
-                    <option id='stid_dft' selected>Subject Topics</option>
+                    <option class='stid_dft' selected>Subject Topics</option>
                 </select>
             </div>
             <div class="modal-footer">
@@ -62,7 +62,7 @@
 
     $("#post_question_model").on('show.bs.modal', function () {
         var s_top_obj = $('#post_s_sel');
-        s_top_obj.html("<option id='stid_dft' selected>Subject Topics</option>");
+        s_top_obj.html("<option class='stid_dft' selected>Subject Topics</option>");
         s_top_obj.attr('disabled', 'disabled');
         $.ajax({
             url: "../application/get_general_topics.php",
@@ -85,7 +85,7 @@
             $.ajax({
                 url: "../application/get_subject_topics.php",
                 type: "post",
-                data: {"gtid": object.options[object.selectedIndex].id.replace('gtid_', '')},
+                data: {"gtid": object.options[object.selectedIndex].className.replace('gtid_', '')},
                 success: function (data) {
                     $("#post_s_sel").html(data);
                 },
@@ -107,7 +107,7 @@
             $.ajax({
                 url: "../application/post_new_question.php",
                 type: "post",
-                data: {"stid": object.options[object.selectedIndex].id.replace('stid_', ''), "title": $('#question_title').val(), "body": $('#question_body').val()},
+                data: {"stid": object.options[object.selectedIndex].className.replace('stid_', ''), "title": $('#question_title').val(), "body": $('#question_body').val()},
                 success: function (data) {
                     $('#post_question_model').modal('toggle');
                     $('#alert_dummy').html(data);
