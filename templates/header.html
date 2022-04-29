@@ -3,6 +3,7 @@
 <script src="../framework/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="../framework/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
 <link href="../framework/bootstrap-5.1.3-dist/css/bootstrap.css" rel="stylesheet">
+<link href="css/header_style.css" rel="stylesheet">
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -18,14 +19,14 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
 
                 <li>
-                    <select class="form-select" aria-label="select_topics" id="g_topic_sel">
+                    <select class="form-select header-sel" aria-label="select_topics" id="g_topic_sel">
                         <option selected>General Topics</option>
                         <option>Test</option>
                     </select>
                 </li>
 
                 <li>
-                    <select class="form-select" aria-label="select_topics" id="s_topic_sel" disabled>
+                    <select class="form-select header-sel" aria-label="select_topics" id="s_topic_sel" disabled>
                         <option selected>Subject Topics</option>
                         <option>Test</option>
                     </select>
@@ -72,6 +73,7 @@
 
 </body>
 <script type="text/javascript">
+
     $("#to_home").click(function () {
         $(location).attr("href", "main.html")
     })
@@ -97,8 +99,41 @@
         });
     })
 
-    $("#perform_search").click(function (){
-        $("#question_container").html("");
+    $('#navbarSupportedContent').ready(function (){
+        $.ajax({
+            url: "../application/get_general_topics.php",
+            type: "post",
+            success: function (data) {
+                $("#g_topic_sel").html(data);
+            },
+            error: function (data){
+                console.warn(data);
+            }
+        });
+    })
+
+    $('#g_topic_sel').on("change", function (){
+        var object = document.getElementById('g_topic_sel');
+        var selected = object.options[object.selectedIndex].value;
+        if(String(selected) !== String("General Topics"))
+        {
+            $('#s_topic_sel').removeAttr('disabled');
+            $.ajax({
+                url: "../application/get_subject_topics.php",
+                type: "post",
+                data: {"gtid": object.options[object.selectedIndex].className.replace('gtid_', '')},
+                success: function (data) {
+                    $("#s_topic_sel").html(data);
+                },
+                error: function (data){
+                    console.warn(data);
+                }
+            });
+        }
+        else
+        {
+            $('#s_topic_sel').attr('disabled', 'disabled');
+        }
     })
 
 </script>
