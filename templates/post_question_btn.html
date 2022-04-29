@@ -37,7 +37,7 @@
             <div class="d-flex gap-3" style="padding-left: 20px">
                 <select id="post_g_sel" class="post-sel"></select>
                 <select id="post_s_sel" class="post-sel" disabled>
-                    <option class='stid_dft' selected>Subject Topics</option>
+                    <option class='stid_stid' selected>Subject Topics</option>
                 </select>
             </div>
             <div class="modal-footer">
@@ -62,7 +62,7 @@
 
     $("#post_question_model").on('show.bs.modal', function () {
         var s_top_obj = $('#post_s_sel');
-        s_top_obj.html("<option class='stid_dft' selected>Subject Topics</option>");
+        s_top_obj.html("<option class='stid_stid' selected>Subject Topics</option>");
         s_top_obj.attr('disabled', 'disabled');
         $.ajax({
             url: "../application/get_general_topics.php",
