@@ -11,13 +11,14 @@ if($pword1 === $pword2)
     try
     {
         $sql -> execute();
-        echo "Success create a new account!";
+        header('Location: ../templates/main.html');
     }
     catch (mysqli_sql_exception $e)
     {
         echo "account already exists!";
     } finally {
        $mysqli->close();
+       $sql->close();
     }
 }
 ?>

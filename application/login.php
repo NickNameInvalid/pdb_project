@@ -26,8 +26,8 @@ if(!$user_check->num_rows)
 $user_check->fetch();
 if($password_hash == $pass)
 {
-    echo "Success!";
     $_SESSION['username'] = $user;
+    header('Location: ../templates/main.html');
 }
 else
 {
@@ -35,4 +35,5 @@ else
 }
 
 $mysqli->close();
+$sql->close();
 ?>
