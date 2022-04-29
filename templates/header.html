@@ -77,7 +77,7 @@
                             <ul class="dropdown-menu">
                             </ul>
                         </li>
-                        <li><a class="dropdown-item profile_dropdown" href="#" id="logour_view">Logout</a>
+                        <li><a class="dropdown-item profile_dropdown" href="#" id="logout_view">Logout</a>
                             <ul class="dropdown-menu">
                             </ul>
                         </li>
@@ -112,14 +112,14 @@
                     $("#sign_in_view").attr ("style","display:none;");
                     $("#sign_up_view").attr ("style","display:none;");
                     $("#profile_view").attr ("style","display:block;");
-                    $("#logour_view").attr ("style","display:block;");
+                    $("#logout_view").attr ("style","display:block;");
                 }
                 else
                 {
                     $("#sign_in_view").attr ("style","display:block;");
                     $("#sign_up_view").attr ("style","display:block;");
                     $("#profile_view").attr ("style","display:none;");
-                    $("#logour_view").attr ("style","display:none;");
+                    $("#logout_view").attr ("style","display:none;");
                 }
             },
             error: function (data){
@@ -165,7 +165,7 @@
         }
     })
 
-    $('#logour_view').on("click", function (){
+    $('#logout_view').on("click", function (){
         $.ajax({
             url: "../application/logout.php",
             type: "post",
