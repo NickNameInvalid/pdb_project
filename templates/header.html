@@ -62,13 +62,13 @@
 
         <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-right: 500px">
             <li class="nav-item me-2">
-                <a class="nav-link" href="#">Profile</a>
+                <a class="nav-link" href="#" id="username_profile">Profile</a>
             </li>
         </ul>
     </div>
 </nav>
 
-<div id="testt"></div>
+<p hidden id="username_tmp"></p>
 
 </body>
 <script type="text/javascript">
@@ -78,6 +78,23 @@
 
     $("#user_profile").click(function () {
         $(location).attr("href", "profile_url")
+    })
+
+    $("#username_tmp").ready(function () {
+        $.ajax({
+            url: "../application/get_current_user.php",
+            type: "post",
+            success: function (data) {
+                $('#username_tmp').html(data);
+                if(data.length > 0)
+                {
+                    $("#username_profile").text(data);
+                }
+            },
+            error: function (data){
+                console.warn(data);
+            }
+        });
     })
 
     $("#perform_search").click(function (){

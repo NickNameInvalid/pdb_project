@@ -1,5 +1,6 @@
 <?php
 include('mysqlidb.php');
+session_start();
 $mysqli = establish_conn();
 
 $stmt = $mysqli->prepare("select q_username, concat(gtname, ' / ', stname) as topics , title, q_body, post_time, status from questions natural join subjecttopics natural join generaltopics where q_visible_status = 1");
