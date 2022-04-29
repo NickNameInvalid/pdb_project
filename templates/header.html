@@ -54,7 +54,7 @@
                 <li>
                     <form class="d-flex">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <button class="btn btn-outline-success" type="button" id="perform_search">Search</button>
                     </form>
                 </li>
             </ul>
@@ -80,8 +80,8 @@
         $(location).attr("href", "profile_url")
     })
 
-    $("#g_topic_sel").ready(function (){
-        $("#g_topic_sel").append("<option>Test2</option>");
+    $("#perform_search").click(function (){
+        $("#question_container").html("");
     })
 
 </script>
