@@ -5,7 +5,7 @@ $mysqli = establish_conn();
 $gtid = $_GET['gtid'] ?? "dft";
 $stid = $_GET['stid'] ?? "dft";
 $keywd = $_GET['key'] ?? "";
-$stype = $_GET['s_stype'] ?? "dft";
+$stype = $_GET['stype'] ?? "dft";
 $sql_text = "select qid, q_username, concat(gtname, ' / ', stname) as topics , title, q_body, post_time, status 
                 from questions natural join subjecttopics natural join generaltopics 
                 where q_visible_status = 1";
