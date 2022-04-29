@@ -1,5 +1,5 @@
 <?php
 session_start();
-$user = $_SESSION['username'] ?? "11111";
+$user = $_SESSION['username'] ?? "";
 echo $user;
 ?>
