@@ -58,9 +58,31 @@
         </div>
 
         <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-right: 500px">
-            <li class="nav-item me-2">
-                <a class="nav-link" href="#" id="username_profile">Sign in/Sign up</a>
-            </li>
+<!--            <li class="nav-item me-2">-->
+<!--                <a class="nav-link" href="#" id="username_profile">Sign in/Sign up</a>-->
+<!--            </li>-->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="username_profile" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">Sign in/Sign up</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="login.html" id="sign_in_view">Sign in</a>
+                            <ul class="dropdown-menu">
+                            </ul>
+                        </li>
+                        <li><a class="dropdown-item" href="register.html" id="sign_up_view">Sign up</a>
+                            <ul class="dropdown-menu">
+                            </ul>
+                        </li>
+                        <li><a class="dropdown-item" href="#" id="profile_view">Profile</a>
+                            <ul class="dropdown-menu">
+                            </ul>
+                        </li>
+                        <li><a class="dropdown-item" href="#" id="logour_view">Logout</a>
+                            <ul class="dropdown-menu">
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
         </ul>
     </div>
 </nav>
@@ -74,9 +96,9 @@
         $(location).attr("href", "main.html")
     })
 
-    $("#user_profile").click(function () {
-        $(location).attr("href", "profile_url")
-    })
+    // $("#user_profile").click(function () {
+    //     $(location).attr("href", "profile_url")
+    // })
 
     $("#username_tmp").ready(function () {
         $.ajax({
@@ -87,6 +109,17 @@
                 if(data.length > 0)
                 {
                     $("#username_profile").text(data);
+                    $("#sign_in_view").attr ("style","display:none;");
+                    $("#sign_up_view").attr ("style","display:none;");
+                    $("#profile_view").attr ("style","display:block;");
+                    $("#logour_view").attr ("style","display:block;");
+                }
+                else
+                {
+                    $("#sign_in_view").attr ("style","display:block;");
+                    $("#sign_up_view").attr ("style","display:block;");
+                    $("#profile_view").attr ("style","display:none;");
+                    $("#logour_view").attr ("style","display:none;");
                 }
             },
             error: function (data){
@@ -130,6 +163,19 @@
         {
             $('#s_topic_sel').attr('disabled', 'disabled');
         }
+    })
+
+    $('#logour_view').on("click", function (){
+        $.ajax({
+            url: "../application/logout.php",
+            type: "post",
+            success: function (data) {
+                location.reload();
+            },
+            error: function (data){
+                console.warn(data);
+            }
+        });
     })
 
 </script>
