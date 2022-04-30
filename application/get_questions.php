@@ -6,32 +6,42 @@ $gtid = $_GET['gtid'] ?? "dft";
 $stid = $_GET['stid'] ?? "dft";
 $keywd = $_GET['key'] ?? "";
 $stype = $_GET['stype'] ?? "dft";
-$sql_text = "select qid, q_username, concat(gtname, ' / ', stname) as topics , title, q_body, post_time, status 
+$params = Array();
+$param_type = "";
+if(empty($keywd))
+{
+    $sql_text = "select qid, q_username, concat(gtname, ' / ', stname) as topics , title, q_body, post_time, status 
                 from questions natural join subjecttopics natural join generaltopics 
                 where q_visible_status = 1";
 
-$params = Array();
-$param_type = "";
-if($stid != "dft")
-{
-    $param_type .= "i";
-    $params[] = $stid;
-    $sql_text .= " and stid = ?";
+    if($stid != "dft")
+    {
+        $param_type .= "i";
+        $params[] = $stid;
+        $sql_text .= " and stid = ?";
+    }
+    else if ($gtid != "dft")
+    {
+        $param_type .= "i";
+        $params[] = $gtid;
+        $sql_text .= " and gtid = ?";
+    }
+    $sql_text .= " order by post_time desc";
+    $stmt = $mysqli->prepare($sql_text);
+    if(count($params) != 0)
+    {
+        $stmt->bind_param($param_type, ...$params);
+    }
+    $stmt -> execute();
+    $stmt->bind_result($qid, $u, $tc, $tt, $bd, $pt, $st);
 }
-else if ($gtid != "dft")
+else
 {
-    $param_type .= "i";
-    $params[] = $gtid;
-    $sql_text .= " and gtid = ?";
+
 }
-$sql_text .= " order by post_time desc";
-$stmt = $mysqli->prepare($sql_text);
-if(count($params) != 0)
-{
-    $stmt->bind_param($param_type, ...$params);
-}
-$stmt -> execute();
-$stmt->bind_result($qid, $u, $tc, $tt, $bd, $pt, $st);
+
+if(empty($stmt)) return;
+
 while($stmt->fetch())
 {
     echo <<<heredoc
