@@ -15,11 +15,10 @@
         let stid = GetQueryString('stid');
         let key = GetQueryString('key');
         let stype = GetQueryString('stype');
-        if(gtid != null) get_data['gtid'] = gtid;
-        if(stid != null) get_data['stid'] = stid;
-        if(key != null) get_data['key'] = key;
-        if(stype != null) get_data['stype'] = stype;
-
+        if(gtid != null && gtid.length > 0) get_data['gtid'] = gtid;
+        if(stid != null && stid.length > 0) get_data['stid'] = stid;
+        if(key != null && key.length > 0) get_data['key'] = key;
+        if(stype != null && stype.length > 0) get_data['stype'] = stype;
         $.ajax({
             url: "../application/get_questions.php",
             type: "get",

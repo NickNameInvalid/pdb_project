@@ -63,6 +63,8 @@ CREATE TABLE Questions (
   status VARCHAR(15) NOT NULL DEFAULT 'unsolved',
   q_visible_status INT NOT NULL default 1,
   PRIMARY KEY (qid),
+  FULLTEXT (title),
+  FULLTEXT (q_body),
   FOREIGN KEY (q_username) REFERENCES Users(username),
   FOREIGN KEY (stid) REFERENCES SubjectTopics(stid)
 );
@@ -78,6 +80,7 @@ CREATE TABLE Answers (
   a_visible_status INT NOT NULL default 1,
   PRIMARY KEY (aid),
   FOREIGN KEY (qid) REFERENCES Questions(qid),
+  FULLTEXT (a_body),
   FOREIGN KEY (a_username) REFERENCES Users (username)
 );
 
