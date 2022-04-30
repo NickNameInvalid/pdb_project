@@ -36,17 +36,21 @@
         var g_obj = document.getElementById('g_topic_sel');
         var s_obj = document.getElementById('s_topic_sel');
         let gtid = g_obj.options[g_obj.selectedIndex].className.replace('gtid_', '');
-        let stid = s_obj.options[s_obj.selectedIndex].className.replace('stid_', '');
+        if(!$('#s_topic_sel').is(':disabled'))
+        {
+            let stid = s_obj.options[s_obj.selectedIndex].className.replace('stid_', '');
+            if(stid != null && stid.length > 0 && $.isNumeric(stid))
+            {
+                get_data['stid'] = stid;
+                cur_location += "stid=" + stid.toString() + "&";
+            }
+        }
         if(gtid != null && gtid.length > 0 && $.isNumeric(gtid))
         {
             get_data['gtid'] = gtid;
             cur_location += "gtid=" + gtid.toString() + "&";
         }
-        if(stid != null && stid.length > 0 && $.isNumeric(stid))
-        {
-            get_data['stid'] = stid;
-            cur_location += "stid=" + stid.toString() + "&";
-        }
+
 
         $.ajax({
             url: "../application/get_questions.php",
