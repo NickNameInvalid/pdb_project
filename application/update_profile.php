@@ -1,8 +1,8 @@
 <?php
 include('mysqlidb.php');
-include('get_current_user.php');
+session_start();
 $mysqli = establish_conn();
-$user = get_current_user();
+$user = $_SESSION['username'] ?? "";
 $firstname = $_POST["firstname"];
 $lastname = $_POST["lastname"];
 $email = $_POST["email"];
@@ -16,10 +16,19 @@ $sql = "update Users
         set firstname=?, lastname=?, email=?, phone=?, city=?, state=?, country=?, profile=?
         where username=?";
 
-if ($stmt = $mysqli->prepare($sql)) {
-    $stmt->bind_param("ssssssss", $firstname, $lastname, $email, $phone, $city, $state, $country, $profile, $user);
-    $stmt->execute();
+try {
+    if ($stmt = $mysqli->prepare($sql)) {
+        $stmt->bind_param("sssssssss", $firstname, $lastname, $email, $phone, $city, $state, $country, $profile, $user);
+        $stmt->execute();
 
-    $stmt->close();
-    $mysqli->close();
+        $stmt->close();
+        $mysqli->close();
+    }
+    echo "Success update profile for " . $user;
 }
+catch (Exception $e) {
+    echo "Some exception happened!";
+} finally {
+    return;
+}
+?>

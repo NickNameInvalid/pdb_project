@@ -36,49 +36,43 @@
             <div class="mb-4">
                 <label for="firstname_view" class="form-label profile_label">First Name</label>
                 <p class="profile_view" contenteditable="false" id="firstname_view">First Name</p>
-                <p id="firstname_hide" hidden></p>
             </div>
             <div class="mb-4">
                 <label for="lastname_view" class="form-label profile_label">Last Name</label>
                 <p class="profile_view" contenteditable="false" id="lastname_view">Last Name</p>
-                <p id="lastname_hide" hidden></p>
             </div>
         </div>
 
         <div class="mb-4">
             <label for="email_view" class="form-label profile_label">Email Address</label>
             <p class="profile_view" contenteditable="false" id="email_view" style="width: 850px">Email Address</p>
-            <p id="email_hide" hidden></p>
         </div>
         <div class="mb-4">
             <label for="phone_view" class="form-label profile_label">Phone</label>
             <p class="profile_view" contenteditable="false" id="phone_view" style="width: 850px">Phone</p>
-            <p id="phone_hide" hidden></p>
         </div>
         <div class="mb-4">
             <label for="city_view" class="form-label profile_label">City</label>
             <p class="profile_view" contenteditable="false" id="city_view" style="width: 850px">City</p>
-            <p id="city_hide" hidden></p>
         </div>
         <div class="mb-4">
             <label for="state_view" class="form-label profile_label">State</label>
             <p class="profile_view" contenteditable="false" id="state_view" style="width: 850px">State</p>
-            <p id="state_hide" hidden></p>
         </div>
         <div class="mb-4">
             <label for="country_view" class="form-label profile_label">Country</label>
             <p class="profile_view" contenteditable="false" id="country_view" style="width: 850px">Country</p>
-            <p id="country_hide" hidden></p>
         </div>
 
         <div class="mb-4" style="width: 850px;">
             <label for="profile_view" class="form-label profile_label">Profile</label>
-            <textarea class="form-control mt-2" id="profile_view" maxlength="500" placeholder="Profile" rows="7" style="background-color: white;resize: none;color: black" disabled></textarea>
-            <span class="label label-default" id="count_message" style="display: none">0 / 500</span>
-            <p id="profile_hide" hidden></p>
+            <div>
+                <textarea class="form-control mt-2" id="profile_view" maxlength="500" placeholder="Profile" rows="7" style="background-color: white;resize: none;color: black" disabled></textarea>
+                <span class="label label-default" id="count_message" style="display: none">0 / 500</span>
+            </div>
             <br>
         </div>
-        <div class="d-flex gap-3 mb-4" id="profile_btn_container">
+        <div class="d-flex gap-3 mb-2" id="profile_btn_container">
             <button type="button" class="btn btn-primary" id="profile_btn_edit" style="display: none">Edit</button>
             <button type="button" class="btn btn-primary" id="profile_btn_save" style="display: none">Save</button>
             <button type="button" class="btn btn-primary" id="profile_btn_cancel" style="display: none">Cancel</button>
@@ -95,7 +89,46 @@
     });
 
     $("#profile_btn_edit").on('click', function (){
-        $(this).attr("style","display:none;");
+        change_to_edit_mode();
+    });
+
+    $("#profile_btn_save").on('click', function (){
+        let firstname = $('#firstname_view').text();
+        let lastname = $('#lastname_view').text();
+        let email = $('#email_view').text();
+        let phone = $('#phone_view').text();
+        let city = $('#city_view').text();
+        let state = $('#state_view').text();
+        let profile = $("textarea[id='profile_view']").val();
+        let country = $('#country_view').text();
+
+        let post_data = {'firstname': firstname,
+                'lastname': lastname,
+                'email': email,
+                'phone': phone,
+                'city': city,
+                'state': state,
+                'country': country,
+                'profile': profile};
+
+        $.ajax({
+            url: "../application/update_profile.php",
+            type: "post",
+            data: post_data,
+            success: function (data) {
+                alert(data);
+            },
+            error: function (data){
+                console.warn(data);
+            }
+        });
+        change_to_view_mode();
+        update_user_profile({'p_user': $('#username_view').text()});
+    });
+
+    function change_to_edit_mode()
+    {
+        $('#profile_btn_edit').attr("style","display:none;");
         $('#profile_btn_save').attr("style","display:block;");
         $('#profile_btn_cancel').attr("style","display:block;");
         change_count();
@@ -108,16 +141,10 @@
         $('#country_view').removeClass('profile_view').addClass('profile_edit').attr("contenteditable", 'true');
         $("textarea[id='profile_view']").removeAttr('disabled');
         $('#count_message').attr("style","display:block;");
-    });
+    }
 
-    $("#profile_btn_save").on('click', function (){
-        $('#profile_btn_edit').attr("style","display:block;");
-        $('#profile_btn_save').attr("style","display:none;");
-        $('#profile_btn_cancel').attr("style","display:none;");
-    });
-
-    $("#profile_btn_cancel").on('click', function (){
-
+    function change_to_view_mode()
+    {
         $('#profile_btn_edit').attr("style","display:block;");
         $('#profile_btn_save').attr("style","display:none;");
         $('#profile_btn_cancel').attr("style","display:none;");
@@ -131,7 +158,10 @@
         $('#country_view').removeClass('profile_edit').addClass('profile_view').attr("contenteditable", 'false');
         $("textarea[id='profile_view']").attr('disabled', 'disabled');
         $('#count_message').attr("style","display:none;");
+    }
 
+    $("#profile_btn_cancel").on('click', function (){
+        change_to_view_mode();
         update_user_profile({'p_user': $('#username_view').text()});
     });
 
