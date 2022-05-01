@@ -14,6 +14,7 @@
 
 <div class="container" id="profile_container" style="padding-top: 100px;padding-left: 200px">
     <form id="editable">
+        <p id="editable_hide" hidden></p>
 
         <div class="mb-4">
             <label for="username_view" class="form-label profile_label">Username</label>
@@ -35,44 +36,52 @@
             <div class="mb-4">
                 <label for="firstname_view" class="form-label profile_label">First Name</label>
                 <p class="profile_view" contenteditable="false" id="firstname_view">First Name</p>
+                <p id="firstname_hide" hidden></p>
             </div>
             <div class="mb-4">
                 <label for="lastname_view" class="form-label profile_label">Last Name</label>
                 <p class="profile_view" contenteditable="false" id="lastname_view">Last Name</p>
+                <p id="lastname_hide" hidden></p>
             </div>
         </div>
 
         <div class="mb-4">
             <label for="email_view" class="form-label profile_label">Email Address</label>
             <p class="profile_view" contenteditable="false" id="email_view" style="width: 850px">Email Address</p>
+            <p id="email_hide" hidden></p>
         </div>
         <div class="mb-4">
             <label for="phone_view" class="form-label profile_label">Phone</label>
             <p class="profile_view" contenteditable="false" id="phone_view" style="width: 850px">Phone</p>
+            <p id="phone_hide" hidden></p>
         </div>
         <div class="mb-4">
             <label for="city_view" class="form-label profile_label">City</label>
             <p class="profile_view" contenteditable="false" id="city_view" style="width: 850px">City</p>
+            <p id="city_hide" hidden></p>
         </div>
         <div class="mb-4">
             <label for="state_view" class="form-label profile_label">State</label>
             <p class="profile_view" contenteditable="false" id="state_view" style="width: 850px">State</p>
+            <p id="state_hide" hidden></p>
         </div>
         <div class="mb-4">
             <label for="country_view" class="form-label profile_label">Country</label>
             <p class="profile_view" contenteditable="false" id="country_view" style="width: 850px">Country</p>
+            <p id="country_hide" hidden></p>
         </div>
 
         <div class="mb-4" style="width: 850px;">
             <label for="profile_view" class="form-label profile_label">Profile</label>
-            <textarea class="form-control mt-2" id="profile_view" maxlength="500" placeholder="Profile" rows="7" style="background-color: white;resize: none;"></textarea>
-            <span class="label label-default" id="count_message">0 / 500</span>
+            <textarea class="form-control mt-2" id="profile_view" maxlength="500" placeholder="Profile" rows="7" style="background-color: white;resize: none;color: black" disabled></textarea>
+            <span class="label label-default" id="count_message" style="display: none">0 / 500</span>
+            <p id="profile_hide" hidden></p>
             <br>
         </div>
         <div class="d-flex gap-3 mb-4" id="profile_btn_container">
-            <button type="button" class="btn btn-primary" id="profile_btn_edit">Edit</button>
-            <button type="button" class="btn btn-primary" id="profile_btn_save">Save</button>
-            <button type="button" class="btn btn-primary" id="profile_btn_cancel">Cancel</button>
+            <button type="button" class="btn btn-primary" id="profile_btn_edit" style="display: none">Edit</button>
+            <button type="button" class="btn btn-primary" id="profile_btn_save" style="display: none">Save</button>
+            <button type="button" class="btn btn-primary" id="profile_btn_cancel" style="display: none">Cancel</button>
         </div>
     </form>
 
@@ -85,10 +94,49 @@
         $("#head_container").load('header.html');
     });
 
-    $("#profile").ready(function (){
-        get_data = {}
-        let p_user = GetQueryString('p_user');
-        if(p_user != null && p_user.length > 0) get_data['p_user'] = p_user;
+    $("#profile_btn_edit").on('click', function (){
+        $(this).attr("style","display:none;");
+        $('#profile_btn_save').attr("style","display:block;");
+        $('#profile_btn_cancel').attr("style","display:block;");
+        change_count();
+        $('#firstname_view').removeClass('profile_view').addClass('profile_edit').attr("contenteditable", 'true');
+        $('#lastname_view').removeClass('profile_view').addClass('profile_edit').attr("contenteditable", 'true');
+        $('#phone_view').removeClass('profile_view').addClass('profile_edit').attr("contenteditable", 'true');
+        $('#email_view').removeClass('profile_view').addClass('profile_edit').attr("contenteditable", 'true');
+        $('#city_view').removeClass('profile_view').addClass('profile_edit').attr("contenteditable", 'true');
+        $('#state_view').removeClass('profile_view').addClass('profile_edit').attr("contenteditable", 'true');
+        $('#country_view').removeClass('profile_view').addClass('profile_edit').attr("contenteditable", 'true');
+        $("textarea[id='profile_view']").removeAttr('disabled');
+        $('#count_message').attr("style","display:block;");
+    });
+
+    $("#profile_btn_save").on('click', function (){
+        $('#profile_btn_edit').attr("style","display:block;");
+        $('#profile_btn_save').attr("style","display:none;");
+        $('#profile_btn_cancel').attr("style","display:none;");
+    });
+
+    $("#profile_btn_cancel").on('click', function (){
+
+        $('#profile_btn_edit').attr("style","display:block;");
+        $('#profile_btn_save').attr("style","display:none;");
+        $('#profile_btn_cancel').attr("style","display:none;");
+
+        $('#firstname_view').removeClass('profile_edit').addClass('profile_view').attr("contenteditable", 'false');
+        $('#lastname_view').removeClass('profile_edit').addClass('profile_view').attr("contenteditable", 'false');
+        $('#phone_view').removeClass('profile_edit').addClass('profile_view').attr("contenteditable", 'false');
+        $('#email_view').removeClass('profile_edit').addClass('profile_view').attr("contenteditable", 'false');
+        $('#city_view').removeClass('profile_edit').addClass('profile_view').attr("contenteditable", 'false');
+        $('#state_view').removeClass('profile_edit').addClass('profile_view').attr("contenteditable", 'false');
+        $('#country_view').removeClass('profile_edit').addClass('profile_view').attr("contenteditable", 'false');
+        $("textarea[id='profile_view']").attr('disabled', 'disabled');
+        $('#count_message').attr("style","display:none;");
+
+        update_user_profile({'p_user': $('#username_view').text()});
+    });
+
+    function update_user_profile(get_data)
+    {
         $.ajax({
             url: "../application/get_profile.php",
             type: "get",
@@ -105,33 +153,38 @@
                 $('#city_view').html(data_json.city);
                 $('#state_view').html(data_json.state);
                 $('#country_view').html(data_json.country);
-                $('#profile_view').val(data_json.profile);
+                $("textarea[id='profile_view']").val(data_json.profile);
+
+                if(data_json.editable)
+                {
+                    $('#profile_btn_edit').attr("style","display:block;");
+                }
             },
             error: function (data){
                 console.warn(data);
             }
         });
+    }
+
+    $("#profile").ready(function (){
+        get_data = {}
+        let p_user = GetQueryString('p_user');
+        if(p_user != null && p_user.length > 0) get_data['p_user'] = p_user;
+        update_user_profile(get_data);
     });
 
-    $('#profile_view').on('change keyup paste', function() {
+    function change_count()
+    {
         var text_length = $("textarea[id='profile_view']").val().length;
-        $('#count_message').html(text_length + ' / ' + '500');
+        let ct_span = $('#count_message');
+        ct_span.attr("style","display:block;");
+        ct_span.html(text_length + ' / ' + '500');
+    }
+
+    $('#profile_view').on('change keyup paste ', function() {
+        change_count();
     });
 
-    $(document).on('submit', '#editable', function(e) {
-        e.preventDefault(); // avoid to execute the actual submit of the form.
-
-        $.ajax({
-            type: "POST",
-            url: $(this).attr('action'),
-            data: $(this).serialize(), // serializes the form's elements.
-            success: function (data)
-            {
-                alert("Updated!");
-            }
-        });
-
-    });
 </script>
 
 </html>
