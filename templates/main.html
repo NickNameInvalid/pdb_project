@@ -35,8 +35,21 @@
         var cur_location = window.location.origin + window.location.pathname + "?";
         var g_obj = document.getElementById('g_topic_sel');
         var s_obj = document.getElementById('s_topic_sel');
+        var q_obj = document.getElementById('search_mode_sel');
         var key = $("#key_word_input").val();
         let gtid = g_obj.options[g_obj.selectedIndex].className.replace('gtid_', '');
+        var stype = q_obj.selectedIndex;
+
+        switch (stype){
+            case 0:
+                get_data['stype'] = "qs";
+                break;
+            case 1:
+                get_data['stype'] = "as";
+                break;
+            default:
+                break;
+        }
 
         if(!$('#s_topic_sel').is(':disabled'))
         {

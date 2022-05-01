@@ -53,5 +53,9 @@
 --     SELECT qid, q_username, title, q_body, post_time, 0.0 as score, 0.4 as weight, stid, status from questions where q_body like '%can I%'
 --     ) as q natural join subjecttopics natural join generaltopics group by qid, q_username, topics, title, q_body, post_time, status having sum(weight) > 0 or sum(score) > 0 order by sum(weight) desc, sum(score) desc, post_time desc
 
-select qid, aid, a_username, a_body from(
-)
+
+select aid, qid, a_username, title, a_body, thumb_ups, answer_time, best_answer from(
+select aid, qid, a_username, a_body, thumb_ups, answer_time, best_answer, match (a_body) against ('w' with query expansion) as score, 0.0 as weight, a_visible_status from answers
+union
+select aid, qid, a_username, a_body, thumb_ups, answer_time, best_answer, 0.0 as score, 1.0 as weight, a_visible_status from answers where a_body like '%w%'
+) as a natural join questions natural join subjecttopics natural join generaltopics  where a_visible_status = 1 group by aid, qid, a_username, a_body, thumb_ups, answer_time, best_answer having sum(weight) > 0 or sum(score) > 0 order by sum(weight) desc, sum(score) desc, answer_time desc
