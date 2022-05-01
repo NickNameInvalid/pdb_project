@@ -16,10 +16,39 @@
 -- where stid = 14 and a_body like '%e%'
 -- ) as q group by qid, title, q_body, q_timestamp order by sum(weight) desc, q_timestamp desc
 
--- select qid, q_username as username, title, q_body, post_time from
--- (SELECT qid, q_username, title, q_body, post_time, match title against ('Work hard' in natural language mode) as score from questions
+-- SELECT qid, q_username, title, q_body, post_time, match q_body against ('I wonder anyone can' with query expansion) as score, 0.6 as weight 
+-- from questions
+
+-- select qid, title, q_body, sum(weight) as weights, post_time, sum(score) as scores from(
+-- SELECT qid, q_username, title, q_body, post_time, match (q_body) against ('can' with query expansion) as score, 0.0 as weight, stid 
+-- from questions natural join subjecttopics where stid = 5
 -- union
--- SELECT qid, q_username, title, q_body, post_time, 2 * match q_body against ('Work hard' in natural language mode) as score from questions
+-- SELECT qid, q_username, title, q_body, post_time, match (title) against ('can' with query expansion) as score, 0.0 as weight, stid 
+-- from questions natural join subjecttopics where stid = 5
 -- union
--- select qid, q_username, title, a_body, post_time, 0.5 * match a_body against ('Work hard' in natural language mode) as score from answers natural join questions) as q
--- group by qid, username, title, q_body, post_time having sum(score) > 0 order by sum(score) desc, post_time desc
+-- SELECT qid, q_username, title, q_body, post_time, 0.0 as score, 0.6 as weight, stid from questions 
+-- natural join subjecttopics where title like '%can%' and stid = 5
+-- union
+-- SELECT qid, q_username, title, q_body, post_time, 0.0 as score, 0.4 as weight, stid from questions 
+-- natural join subjecttopics where q_body like '%can%' and stid = 5
+-- ) as q group by qid, title, q_body, post_time having weights > 0 or scores > 0 order by sum(weight) desc, sum(score) desc, post_time desc
+
+-- select qid, q_username, title, q_body, sum(weight), sum(score) from(
+-- SELECT qid, q_username, title, q_body, post_time, match (q_body) against ('can' with query expansion) as score, 0.0 as weight, stid from questions
+-- union
+-- SELECT qid, q_username, title, q_body, post_time, match (title) against ('can' with query expansion) as score, 0.0 as weight, stid from questions
+-- union
+-- SELECT qid, q_username, title, q_body, post_time, 0.0 as score, 0.6 as weight, stid from questions where title like '%can%'
+-- union
+-- SELECT qid, q_username, title, q_body, post_time, 0.0 as score, 0.4 as weight, stid from questions where q_body like '%can%'
+-- ) as q natural join subjecttopics natural join generaltopics group by qid, q_username, title, q_body, post_time having sum(weight) > 0 or sum(score) > 0 order by sum(weight) desc, sum(score) desc, post_time desc
+
+    select qid, q_username, concat(gtname, ' / ', stname) as topics , title, q_body, post_time, status from(
+    SELECT qid, q_username, title, q_body, post_time, match (q_body) against (? with query expansion) as score, 0.0 as weight, stid, status from questions
+    union
+    SELECT qid, q_username, title, q_body, post_time, match (title) against (? with query expansion) as score, 0.0 as weight, stid, status from questions
+    union
+    SELECT qid, q_username, title, q_body, post_time, 0.0 as score, 0.6 as weight, stid, status from questions where title like ?
+    union
+    SELECT qid, q_username, title, q_body, post_time, 0.0 as score, 0.4 as weight, stid, status from questions where q_body like ?
+    ) as q natural join subjecttopics natural join generaltopics group by qid, q_username, title, q_body, post_time having sum(weight) > 0 or sum(score) > 0 order by sum(weight) desc, sum(score) desc, post_time desc

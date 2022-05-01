@@ -35,7 +35,9 @@
         var cur_location = window.location.origin + window.location.pathname + "?";
         var g_obj = document.getElementById('g_topic_sel');
         var s_obj = document.getElementById('s_topic_sel');
+        var key = $("#key_word_input").val();
         let gtid = g_obj.options[g_obj.selectedIndex].className.replace('gtid_', '');
+
         if(!$('#s_topic_sel').is(':disabled'))
         {
             let stid = s_obj.options[s_obj.selectedIndex].className.replace('stid_', '');
@@ -49,6 +51,12 @@
         {
             get_data['gtid'] = gtid;
             cur_location += "gtid=" + gtid.toString() + "&";
+        }
+
+        if(key != null && key.length > 0)
+        {
+            get_data['key'] = key;
+            cur_location += "key=" + key.toString() + "&";
         }
 
         $.ajax({
