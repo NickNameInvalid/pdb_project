@@ -6,12 +6,73 @@
     <script src="../framework/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/utils.js"></script>
     <link href="../framework/bootstrap-5.1.3-dist/css/bootstrap.css" rel="stylesheet">
+    <link href="css/profile_style.css" rel="stylesheet">
     <title>Profile</title>
 </head>
 <body>
 <div class="container" id="head_container"></div>
 
-<div class="container" id="profile" style="padding-top: 80px;margin-left: auto;"></div>
+<div class="container" id="profile_container" style="padding-top: 120px;padding-left: 200px">
+    <form id="editable">
+
+        <div class="mb-4">
+            <label for="username_view" class="form-label profile_label">Username</label>
+            <p class="profile_view" contenteditable="false" id="username_view" style="width: 850px">Username</p>
+        </div>
+
+        <div class="d-flex gap-5">
+            <div class="mb-4">
+                <label for="karma_view" class="form-label profile_label">Karma points</label>
+                <p class="profile_view" contenteditable="false" id="karma_view">Karma points</p>
+            </div>
+            <div class="mb-4">
+                <label for="status_view" class="form-label profile_label">Status</label>
+                <p class="profile_view" contenteditable="false" id="status_view">Status</p>
+            </div>
+        </div>
+
+        <div class="d-flex gap-5">
+            <div class="mb-4">
+                <label for="fastname_view" class="form-label profile_label">First Name</label>
+                <p class="profile_view" contenteditable="false" id="fastname_view">First Name</p>
+            </div>
+            <div class="mb-4">
+                <label for="lastname_view" class="form-label profile_label">Last Name</label>
+                <p class="profile_view" contenteditable="false" id="lastname_view">Last Name</p>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <label for="email_view" class="form-label profile_label">Email Address</label>
+            <p class="profile_view" contenteditable="false" id="email_view" style="width: 850px">Email Address</p>
+        </div>
+        <div class="mb-4">
+            <label for="phone_view" class="form-label profile_label">Phone</label>
+            <p class="profile_view" contenteditable="false" id="phone_view" style="width: 850px">Phone</p>
+        </div>
+        <div class="mb-4">
+            <label for="city_view" class="form-label profile_label">City</label>
+            <p class="profile_view" contenteditable="false" id="city_view" style="width: 850px">City</p>
+        </div>
+        <div class="mb-4">
+            <label for="state_view" class="form-label profile_label">State</label>
+            <p class="profile_view" contenteditable="false" id="state_view" style="width: 850px">State</p>
+        </div>
+        <div class="mb-4">
+            <label for="country_view" class="form-label profile_label">Country</label>
+            <p class="profile_view" contenteditable="false" id="country_view" style="width: 850px">Country</p>
+        </div>
+
+        <div class="mb-4">
+            <label for="profile_view" class="form-label profile_label">Profile</label>
+            <textarea class="form-control mt-2" id="profile_view" maxlength="500" placeholder="Type in your message" rows="5" style="width: 850px"></textarea>
+        </div>
+        <div class="d-flex gap-5 mb-4" id="profile_btn_container">
+            <button type="button" class="btn btn-primary">Edit</button>
+        </div>
+    </form>
+
+</div>
 
 </body>
 

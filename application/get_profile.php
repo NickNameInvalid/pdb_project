@@ -6,55 +6,6 @@ $c_user = $_SESSION['username'] ?? "";
 $p_user = $_GET['p_user'] ?? "dft";
 
 if ($p_user == "dft") {
-    echo <<< heredoc
-        <form id="editable">
-            <div class="mb-3">
-                <label for="firstname" class="form-label">First Name</label>
-                <input type="text" class="form-control" id="firstname" value="First Name">
-            </div>
-            <div class="mb-3">
-                <label for="lastname" class="form-label">Last Name</label>
-                <input type="text" class="form-control" id="lastname" value="Last Name">
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email Address</label>
-                <input type="text" class="form-control" id="email" value="Email Address">
-            </div>
-            <div class="mb-3">
-                <label for="phone" class="form-label">Phone Number</label>
-                <input type="text" class="form-control" id="phone" value="Phone Number">
-            </div>
-            <div class="mb-3">
-                <label for="city" class="form-label">City</label>
-                <input type="text" class="form-control" id="city" value="City">
-            </div>
-            <div class="mb-3">
-                <label for="state" class="form-label">State</label>
-                <input type="text" class="form-control" id="state" value="State">
-            </div>
-            <div class="mb-3">
-                <label for="country" class="form-label">Country</label>
-                <input type="text" class="form-control" id="country" value="Country">
-            </div>
-            <div class="mb-3">
-                <label for="profile" class="form-label">Profile</label>
-                <input type="text" class="form-control" id="profile" value="Profile">
-            </div>
-        </form>
-        <div class="card">
-            <div class="card-body">
-                <div class="row mb-3">
-                    <div class="col-sm-3">
-                        <h6 class="mb-0">Karma Points</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        <h6 class="mb-0">NaN</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-    heredoc;
-    $mysqli->close();
     return;
 }
 
