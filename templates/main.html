@@ -38,14 +38,14 @@
         var q_obj = document.getElementById('search_mode_sel');
         var key = $("#key_word_input").val();
         let gtid = g_obj.options[g_obj.selectedIndex].className.replace('gtid_', '');
-        var stype = q_obj.selectedIndex;
+        var stype = "";
 
-        switch (stype){
+        switch (q_obj.selectedIndex){
             case 0:
-                get_data['stype'] = "qs";
+                stype = "qs";
                 break;
             case 1:
-                get_data['stype'] = "as";
+                stype = "as";
                 break;
             default:
                 break;
@@ -70,6 +70,11 @@
         {
             get_data['key'] = key;
             cur_location += "key=" + key.toString() + "&";
+        }
+
+        if(stype.length > 0){
+            get_data['stype'] = stype;
+            cur_location += "stype=" + stype.toString() + "&";
         }
 
         $.ajax({
