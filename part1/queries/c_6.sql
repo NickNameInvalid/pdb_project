@@ -54,8 +54,11 @@
 --     ) as q natural join subjecttopics natural join generaltopics group by qid, q_username, topics, title, q_body, post_time, status having sum(weight) > 0 or sum(score) > 0 order by sum(weight) desc, sum(score) desc, post_time desc
 
 
-select aid, qid, a_username, title, a_body, thumb_ups, answer_time, best_answer from(
-select aid, qid, a_username, a_body, thumb_ups, answer_time, best_answer, match (a_body) against ('w' with query expansion) as score, 0.0 as weight, a_visible_status from answers
-union
-select aid, qid, a_username, a_body, thumb_ups, answer_time, best_answer, 0.0 as score, 1.0 as weight, a_visible_status from answers where a_body like '%w%'
-) as a natural join questions natural join subjecttopics natural join generaltopics  where a_visible_status = 1 group by aid, qid, a_username, a_body, thumb_ups, answer_time, best_answer having sum(weight) > 0 or sum(score) > 0 order by sum(weight) desc, sum(score) desc, answer_time desc
+-- select aid, qid, a_username, title, a_body, thumb_ups, answer_time, best_answer, concat(gtname, ' / ', stname) as topics from(
+-- select aid, qid, a_username, a_body, thumb_ups, answer_time, best_answer, match (a_body) against ('w' with query expansion) as score, 0.0 as weight, a_visible_status from answers
+-- union
+-- select aid, qid, a_username, a_body, thumb_ups, answer_time, best_answer, 0.0 as score, 1.0 as weight, a_visible_status from answers where a_body like '%w%'
+-- ) as a natural join questions natural join subjecttopics natural join generaltopics where a_visible_status = 1 group by aid, qid, a_username, a_body, thumb_ups, answer_time, best_answer having sum(weight) > 0 or sum(score) > 0 order by sum(weight) desc, sum(score) desc, answer_time desc
+
+select aid, qid, concat(gtname, ' / ', stname) as topics, a_username, title, a_body, thumb_ups, answer_time, best_answer from answers natural join subjecttopics natural join generaltopics
+                where q_visible_status = 1

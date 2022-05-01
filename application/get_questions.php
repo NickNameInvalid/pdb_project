@@ -10,31 +10,53 @@ $params = Array();
 $param_type = "";
 if(empty($keywd))
 {
-    $sql_text = "select qid, q_username, concat(gtname, ' / ', stname) as topics , title, q_body, post_time, status 
+    if($stype == "dft" || $stype == "qs") {
+        $sql_text = "select qid, q_username, concat(gtname, ' / ', stname) as topics , title, q_body, post_time, status 
                 from questions natural join subjecttopics natural join generaltopics 
                 where q_visible_status = 1";
 
-    if($stid != "dft")
-    {
-        $param_type .= "i";
-        $params[] = $stid;
-        $sql_text .= " and stid = ?";
-    }
-    else if ($gtid != "dft")
-    {
-        $param_type .= "i";
-        $params[] = $gtid;
-        $sql_text .= " and gtid = ?";
-    }
+        if ($stid != "dft") {
+            $param_type .= "i";
+            $params[] = $stid;
+            $sql_text .= " and stid = ?";
+        } else if ($gtid != "dft") {
+            $param_type .= "i";
+            $params[] = $gtid;
+            $sql_text .= " and gtid = ?";
+        }
 
-    $sql_text .= " order by post_time desc";
-    $stmt = $mysqli->prepare($sql_text);
-    if(count($params) != 0)
-    {
-        $stmt->bind_param($param_type, ...$params);
+        $sql_text .= " order by post_time desc";
+        $stmt = $mysqli->prepare($sql_text);
+        if (count($params) != 0) {
+            $stmt->bind_param($param_type, ...$params);
+        }
+        $stmt->execute();
+        $stmt->bind_result($qid, $u, $tc, $tt, $bd, $pt, $st);
     }
-    $stmt -> execute();
-    $stmt->bind_result($qid, $u, $tc, $tt, $bd, $pt, $st);
+    else if($stype == "as")
+    {
+        $sql_text = "select aid, qid, concat(gtname, ' / ', stname) as topics, a_username, title, a_body, thumb_ups, answer_time, best_answer 
+                    from answers natural join questions natural join subjecttopics natural join generaltopics 
+                    where q_visible_status = 1";
+
+        if ($stid != "dft") {
+            $param_type .= "i";
+            $params[] = $stid;
+            $sql_text .= " and stid = ?";
+        } else if ($gtid != "dft") {
+            $param_type .= "i";
+            $params[] = $gtid;
+            $sql_text .= " and gtid = ?";
+        }
+
+        $sql_text .= " order by answer_time desc";
+        $stmt = $mysqli->prepare($sql_text);
+        if (count($params) != 0) {
+            $stmt->bind_param($param_type, ...$params);
+        }
+        $stmt->execute();
+        $stmt->bind_result($aid, $qid, $tc, $au, $tt, $ab, $tu, $at, $ba);
+    }
 }
 else
 {
