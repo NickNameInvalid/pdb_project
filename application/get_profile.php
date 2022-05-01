@@ -3,7 +3,7 @@ include('mysqlidb.php');
 session_start();
 $mysqli = establish_conn();
 $c_user = $_SESSION['username'] ?? "";
-$p_user = $_GET['p_user'] ?? "user1";
+$p_user = $_GET['p_user'] ?? "";
 
 if ($p_user == "dft") {
     return;
