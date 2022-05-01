@@ -41,13 +41,13 @@ else
 
     $sql_text = <<<dochere
     select qid, q_username, concat(gtname, ' / ', stname) as topics , title, q_body, post_time, status from(
-    SELECT qid, q_username, title, q_body, post_time, match (q_body) against (? with query expansion) as score, 0.0 as weight, stid, status, q_visible_status from questions
+    select qid, q_username, title, q_body, post_time, match (q_body) against (? with query expansion) as score, 0.0 as weight, stid, status, q_visible_status from questions
     union
-    SELECT qid, q_username, title, q_body, post_time, match (title) against (? with query expansion) as score, 0.0 as weight, stid, status, q_visible_status from questions
+    select qid, q_username, title, q_body, post_time, match (title) against (? with query expansion) as score, 0.0 as weight, stid, status, q_visible_status from questions
     union
-    SELECT qid, q_username, title, q_body, post_time, 0.0 as score, 0.6 as weight, stid, status, q_visible_status from questions where title like ?
+    select qid, q_username, title, q_body, post_time, 0.0 as score, 0.6 as weight, stid, status, q_visible_status from questions where title like ?
     union
-    SELECT qid, q_username, title, q_body, post_time, 0.0 as score, 0.4 as weight, stid, status, q_visible_status from questions where q_body like ?
+    select qid, q_username, title, q_body, post_time, 0.0 as score, 0.4 as weight, stid, status, q_visible_status from questions where q_body like ?
     ) as q natural join subjecttopics natural join generaltopics where q_visible_status = 1
     dochere;
     $param_type .= "ssss";
