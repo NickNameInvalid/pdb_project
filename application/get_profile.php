@@ -36,6 +36,10 @@ if ($p_user == "dft") {
                 <label for="country" class="form-label">Country</label>
                 <input type="text" class="form-control" id="country" value="Country">
             </div>
+            <div class="mb-3">
+                <label for="profile" class="form-label">Profile</label>
+                <input type="text" class="form-control" id="profile" value="Profile">
+            </div>
         </form>
         <div class="card">
             <div class="card-body">
@@ -45,18 +49,6 @@ if ($p_user == "dft") {
                     </div>
                     <div class="col-sm-9 text-secondary">
                         <h6 class="mb-0">NaN</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <div class="row mb-3">
-                    <div class="col-sm-3">
-                        <h6 class="mb-0">Profile</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        <p class="card-text">None</p>
                     </div>
                 </div>
             </div>
@@ -112,6 +104,10 @@ if ($stmt = $mysqli->prepare($sql)) {
                 <label for="country" class="form-label">Country</label>
                 <input type="text" class="form-control" id="country" name="country" value="$co">
             </div>
+            <div class="mb-3">
+                <label for="profile" class="form-label">Profile</label>
+                <input type="text" class="form-control" id="profile" name="profile" value="$pf">
+            </div>
             <button type="submit" class="btn btn-primary" $hd>Update</button>
         </form>
         <div class="card">
@@ -122,18 +118,6 @@ if ($stmt = $mysqli->prepare($sql)) {
                     </div>
                     <div class="col-sm-9 text-secondary">
                         <h6 class="mb-0">$kp</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <div class="row mb-3">
-                    <div class="col-sm-3">
-                        <h6 class="mb-0">Profile</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        <p class="card-text">$pf</p>
                     </div>
                 </div>
             </div>
