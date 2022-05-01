@@ -1,8 +1,8 @@
 <?php
 include('mysqlidb.php');
-include('get_current_user.php');
+session_start();
 $mysqli = establish_conn();
-$c_user = get_current_user();
+$c_user = $_SESSION['username'] ?? "";
 $p_user = $_GET['p_user'] ?? "dft";
 
 if ($p_user == "dft") {
