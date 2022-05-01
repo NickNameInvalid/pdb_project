@@ -27,6 +27,13 @@
     width: 850px;
 }
 
+#count_message {
+    background-color: #575757;
+    border-radius: 5px;
+    margin-top: 10px;
+    color: #dde0e3;
+}
+
 .edit_border{
     display: inline-block;
     width: 94px;

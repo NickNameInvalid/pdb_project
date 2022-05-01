@@ -63,12 +63,16 @@
             <p class="profile_view" contenteditable="false" id="country_view" style="width: 850px">Country</p>
         </div>
 
-        <div class="mb-4">
+        <div class="mb-4" style="width: 850px;">
             <label for="profile_view" class="form-label profile_label">Profile</label>
-            <textarea class="form-control mt-2" id="profile_view" maxlength="500" placeholder="Type in your message" rows="5" style="width: 850px"></textarea>
+            <textarea class="form-control mt-2" id="profile_view" maxlength="500" placeholder="Profile" rows="7" style="background-color: white;resize: none;"></textarea>
+            <span class="label label-default" id="count_message">0 / 500</span>
+            <br>
         </div>
-        <div class="d-flex gap-5 mb-4" id="profile_btn_container">
-            <button type="button" class="btn btn-primary">Edit</button>
+        <div class="d-flex gap-3 mb-4" id="profile_btn_container">
+            <button type="button" class="btn btn-primary" id="profile_btn_edit">Edit</button>
+            <button type="button" class="btn btn-primary" id="profile_btn_save">Save</button>
+            <button type="button" class="btn btn-primary" id="profile_btn_cancel">Cancel</button>
         </div>
     </form>
 
@@ -96,6 +100,11 @@
                 console.warn(data);
             }
         });
+    });
+
+    $('#profile_view').on('change keyup paste', function() {
+        var text_length = $("textarea[id='profile_view']").val().length;
+        $('#count_message').html(text_length + ' / ' + '500');
     });
 
     $(document).on('submit', '#editable', function(e) {
