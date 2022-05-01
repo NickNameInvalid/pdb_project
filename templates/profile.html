@@ -33,8 +33,8 @@
 
         <div class="d-flex gap-5">
             <div class="mb-4">
-                <label for="fastname_view" class="form-label profile_label">First Name</label>
-                <p class="profile_view" contenteditable="false" id="fastname_view">First Name</p>
+                <label for="firstname_view" class="form-label profile_label">First Name</label>
+                <p class="profile_view" contenteditable="false" id="firstname_view">First Name</p>
             </div>
             <div class="mb-4">
                 <label for="lastname_view" class="form-label profile_label">Last Name</label>
@@ -94,7 +94,18 @@
             type: "get",
             data: get_data,
             success: function (data) {
-                $("#profile").html(data);
+                let data_json = $.parseJSON(data);
+                $('#username_view').html(data_json.username);
+                $('#karma_view').html(data_json.karma_point);
+                $('#status_view').html(data_json.status);
+                $('#firstname_view').html(data_json.firstname);
+                $('#lastname_view').html(data_json.lastname);
+                $('#phone_view').html(data_json.phone);
+                $('#email_view').html(data_json.email);
+                $('#city_view').html(data_json.city);
+                $('#state_view').html(data_json.state);
+                $('#country_view').html(data_json.country);
+                $('#profile_view').val(data_json.profile);
             },
             error: function (data){
                 console.warn(data);
