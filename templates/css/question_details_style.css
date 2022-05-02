@@ -34,3 +34,24 @@
 {
     word-wrap:break-word;
 }
+
+.answer-question-button
+{
+    position: fixed;
+    height: 70px;
+    width: 70px;
+    bottom: 100px;
+    right: 100px;
+}
+
+.answer-question-button-round
+{
+    width: 70px;
+    height: 70px;
+    padding: 10px 10px;
+    text-align: center;
+    line-height: 1.33;
+    border-radius: 35px;
+    bottom: 100px;
+    right: 100px;
+}
