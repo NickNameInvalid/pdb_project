@@ -15,6 +15,7 @@
 <div id="head_container"></div>
 
 <div class="container gap-3" id="question_container" style="padding-top: 80px;margin-left: auto;">
+    <h4 class="mb-2">Question</h4>
     <div class="card mb-3">
         <div class="card-body">
             <h4 class="card-title" id="q_title">Question Title</h4>
@@ -24,9 +25,12 @@
                 <div class="p-2 user_post" id="q_user">user</div>
                 <div class="p-2 time_post" id="q_time">time</div>
                 <div class="p-2 post_topics" id="q_topics">g_topic & s_topic</div>
-                <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#post_question_model" title="Post a new question" id="post_float_btn" style="height: 40px;vertical-align:middle;">
+                <button type="button" class="btn btn-default" id="solve_q_btn" style="height: 40px;vertical-align:middle;">
                     <img src="../framework/bootstrap-icons-1.8.1/check-square.svg" alt="solve status">
                     <div class="p-0 question_status" id="q_status" hidden></div>
+                </button>
+                <button type="button" class="btn btn-default" id="edit_q_btn" style="height: 40px;vertical-align:middle;">
+                    <img src="../framework/bootstrap-icons-1.8.1/pencil-square.svg" alt="edit">
                 </button>
             </div>
         </div>
