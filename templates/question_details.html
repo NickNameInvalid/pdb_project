@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../framework/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <script src="../framework/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/utils.js"></script>
+    <link href="../framework/bootstrap-5.1.3-dist/css/bootstrap.css" rel="stylesheet">
+    <link href="css/question_details_style.css" rel="stylesheet">
+    <title>Question Detail</title>
+</head>
+
+<body>
+
+<div id="head_container"></div>
+
+<div class="container gap-3" id="question_container" style="padding-top: 80px;margin-left: auto;">
+    <div class="card mb-3">
+        <div class="card-body">
+            <h4 class="card-title" id="q_title">Question Title</h4>
+            <div class="dropdown-divider"></div>
+            <p class="card-text" id="q_body">Question Body</p>
+            <div class="post_time d-flex gap-lg-5">
+                <div class="p-2 user_post" id="q_user">user</div>
+                <div class="p-2 time_post" id="q_time">time</div>
+                <div class="p-2 post_topics" id="q_topics">g_topic & s_topic</div>
+                <div class="p-2 question_status" id="q_status">status</div>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+
+<div class="container gap-3" id="answer_list_container"></div>
+
+</body>
+
+<script>
+    $(document).ready(function (){
+        $("#head_container").load('header.html');
+    });
+
+    $("#question_container").ready(function (){
+        get_data = {}
+        let qid = GetQueryString('qid');
+        if(qid != null && qid.length > 0) get_data['qid'] = qid;
+        $.ajax({
+            url: "../application/get_cur_question.php",
+            type: "get",
+            data: get_data,
+            success: function (data) {
+                let data_json = $.parseJSON(data);
+                $("#q_title").html(data_json.q_title);
+                $("#q_body").html(data_json.q_body);
+                $("#q_user").html(data_json.q_user);
+                $("#q_time").html(data_json.q_time);
+                $("#q_topics").html(data_json.q_topics);
+                $("#q_status").html(data_json.q_status);
+            },
+            error: function (data){
+                console.warn(data);
+            }
+        });
+    })
+
+    $("#answer_list_container").ready(function (){
+        get_data = {}
+        let qid = GetQueryString('qid');
+        if(qid != null && qid.length > 0) get_data['qid'] = qid;
+        $.ajax({
+            url: "../application/get_answers.php",
+            type: "get",
+            data: get_data,
+            success: function (data) {
+                $("#answer_list_container").html(data);
+            },
+            error: function (data){
+                console.warn(data);
+            }
+        });
+    })
+
+    $('body').on("click", '.user_post', function (){
+        window.location.href = "profile.html?p_user=" + $(this).text();
+    })
+
+    $('body').on("click", '.thumb_ups', function (){
+        post_data = {}
+        let qid = GetQueryString('qid');
+        if(qid != null && qid.length > 0) get_data['qid'] = qid;
+    })
+
+</script>
+
+</html>

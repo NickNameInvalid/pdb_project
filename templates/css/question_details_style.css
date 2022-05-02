@@ -1,0 +1,31 @@
+.user_post:hover {
+    cursor: pointer;
+    color: darkblue;
+    border-color: darkblue;
+}
+
+.user_post
+{
+    color:#007bff;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    width: 70px;
+    height: 40px;
+    text-align: center;
+}
+
+.thumb_ups:hover {
+    cursor: pointer;
+    color: darkblue;
+    border-color: darkblue;
+}
+
+.thumb_ups
+{
+    color:#007bff;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    width: 70px;
+    height: 40px;
+    text-align: center;
+}
