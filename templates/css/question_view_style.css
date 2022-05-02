@@ -4,6 +4,11 @@
     border-color: darkblue;
 }
 
+.title_link:hover {
+    cursor: pointer;
+    color: #0080ff;
+}
+
 .user_post
 {
     color:#007bff;

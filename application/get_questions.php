@@ -140,7 +140,7 @@ while($stmt->fetch())
         echo <<<heredoc
             <div class="card mb-3" id="qid_$qid">
                 <div class="card-body">
-                    <h4 class="card-title">$tt</h4>
+                    <h4 class="card-title title_link">$tt</h4>
                     <div class="dropdown-divider"></div>
                     <p class="card-text">$bd</p>
                     <div class="post_time d-flex gap-lg-5">
@@ -160,7 +160,7 @@ while($stmt->fetch())
             <div class="card mb-3" id="qid_$qid">
                 <div class="card-body">
                     <p hidden id="main_aid_$aid">
-                    <h4 class="card-title">Q: {$tt}</h4>
+                    <h4 class="card-title title_link">Q: {$tt}</h4>
                     <div class="dropdown-divider"></div>
                     <p class="card-text">A: {$ab}</p>
                     <div class="post_time d-flex gap-lg-5">

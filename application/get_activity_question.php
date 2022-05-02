@@ -13,7 +13,7 @@ while($stmt->fetch())
     echo <<<dochere
         <div class="card mb-3" id="act_qid_$qid">
             <div class="card-body">
-                <h4 class="card-title">$title</h4>
+                <h4 class="card-title title_link">$title</h4>
                 <div class="dropdown-divider"></div>
                 <p class="card-text">$body</p>
                 <div class="post_time d-flex gap-lg-5">
