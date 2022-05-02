@@ -65,7 +65,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="username_profile" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">Sign in/Sign up</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu me-3" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item profile_dropdown" href="login.html" id="sign_in_view">Sign in</a>
                             <ul class="dropdown-menu">
                             </ul>
@@ -75,6 +75,10 @@
                             </ul>
                         </li>
                         <li><a class="dropdown-item profile_dropdown" href="#" id="profile_view">Profile</a>
+                            <ul class="dropdown-menu">
+                            </ul>
+                        </li>
+                        <li><a class="dropdown-item profile_dropdown" href="#" id="activity_view">Activity</a>
                             <ul class="dropdown-menu">
                             </ul>
                         </li>
@@ -112,6 +116,7 @@
                     $("#username_profile").text(data);
                     $("#sign_in_view").attr ("style","display:none;");
                     $("#sign_up_view").attr ("style","display:none;");
+                    $("#activity_view").attr ("style","display:block;");
                     $("#profile_view").attr ("style","display:block;");
                     $("#logout_view").attr ("style","display:block;");
                 }
@@ -119,6 +124,7 @@
                 {
                     $("#sign_in_view").attr ("style","display:block;");
                     $("#sign_up_view").attr ("style","display:block;");
+                    $("#activity_view").attr ("style","display:none;");
                     $("#profile_view").attr ("style","display:none;");
                     $("#logout_view").attr ("style","display:none;");
                 }
@@ -181,6 +187,10 @@
 
     $('#profile_view').on("click", function () {
         window.location.href = "profile.html?p_user=" + $("#username_tmp").text();
+    })
+
+    $('#activity_view').on("click", function () {
+        window.location.href = "activity.html?a_user=" + $("#username_tmp").text();
     })
 
 </script>

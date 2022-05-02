@@ -159,7 +159,7 @@ while($stmt->fetch())
         echo <<<heredoc
             <div class="card mb-3" id="qid_$qid">
                 <div class="card-body">
-                    <p type="hidden" id="aid_$aid">
+                    <p hidden id="main_aid_$aid">
                     <h4 class="card-title">Q: {$tt}</h4>
                     <div class="dropdown-divider"></div>
                     <p class="card-text">A: {$ab}</p>
