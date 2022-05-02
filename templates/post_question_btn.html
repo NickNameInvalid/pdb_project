@@ -54,13 +54,15 @@
 
     $(document).ready(function(){
         $("#post_question_model").modal();
+        init_model();
     });
 
     $("#post_float_btn").on("mouseenter", function (){
         $("#post_float_btn").tooltip();
     });
 
-    $("#post_question_model").on('show.bs.modal', function () {
+    function init_model()
+    {
         var s_top_obj = $('#post_s_sel');
         s_top_obj.html("<option class='stid_dft' selected>Subject Topics</option>");
         s_top_obj.attr('disabled', 'disabled');
@@ -74,6 +76,10 @@
                 console.warn(data);
             }
         });
+    }
+
+    $("#post_question_model").on('show.bs.modal', function () {
+        init_model();
     })
 
     $('#post_g_sel').on("change", function (){
