@@ -31,7 +31,7 @@ if ($stmt = $mysqli->prepare($sql)) {
             <div class="card mb-3">
                 <div class="card-body">
                     <p class="p-2 aid" hidden>$aid</p>
-                    <p class="card-text">$a_body</p>
+                    <p class="card-text detail_body" contenteditable="false">$a_body</p>
                     <div class="post_time d-flex gap-lg-5">
                         <div class="p-2 user_post">$a_user</div>
                         <div class="p-2 time_post">$a_time</div>

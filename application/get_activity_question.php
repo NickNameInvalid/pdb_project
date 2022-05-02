@@ -15,7 +15,7 @@ while($stmt->fetch())
             <div class="card-body">
                 <h4 class="card-title title_link">$title</h4>
                 <div class="dropdown-divider"></div>
-                <p class="card-text">$body</p>
+                <p class="card-text view_body">$body</p>
                 <div class="post_time d-flex gap-lg-5">
                     <div class="p-2 time_post">$posttime</div>
                     <div class="p-2 post_topics">$topic</div>

@@ -29,3 +29,8 @@
     height: 40px;
     text-align: center;
 }
+
+.detail_body
+{
+    word-wrap:break-word;
+}
