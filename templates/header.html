@@ -193,6 +193,70 @@
         window.location.href = "activity.html?a_user=" + $("#username_tmp").text();
     })
 
+    $(document).on("click", "#perform_search", function (){
+        get_data = {}
+        var cur_location = window.location.origin + window.location.pathname + "?";
+        var g_obj = document.getElementById('g_topic_sel');
+        var s_obj = document.getElementById('s_topic_sel');
+        var q_obj = document.getElementById('search_mode_sel');
+        var key = $("#key_word_input").val();
+        let gtid = g_obj.options[g_obj.selectedIndex].className.replace('gtid_', '');
+        var stype = "";
+
+        switch (q_obj.selectedIndex){
+            case 0:
+                stype = "qs";
+                break;
+            case 1:
+                stype = "as";
+                break;
+            default:
+                break;
+        }
+
+        if(!$('#s_topic_sel').is(':disabled'))
+        {
+            let stid = s_obj.options[s_obj.selectedIndex].className.replace('stid_', '');
+            if(stid != null && stid.length > 0 && $.isNumeric(stid))
+            {
+                get_data['stid'] = stid;
+                cur_location += "stid=" + stid.toString() + "&";
+            }
+        }
+        if(gtid != null && gtid.length > 0 && $.isNumeric(gtid))
+        {
+            get_data['gtid'] = gtid;
+            cur_location += "gtid=" + gtid.toString() + "&";
+        }
+
+        if(key != null && key.length > 0)
+        {
+            get_data['key'] = key;
+            cur_location += "key=" + key.toString() + "&";
+        }
+
+        if(stype.length > 0){
+            get_data['stype'] = stype;
+            cur_location += "stype=" + stype.toString() + "&";
+        }
+
+        $.ajax({
+            url: "../application/get_questions.php",
+            type: "get",
+            data: get_data,
+            success: function (data) {
+                $("#card_list_container").html(data);
+            },
+            error: function (data){
+                console.warn(data);
+            }
+        });
+
+        if("?&".indexOf(cur_location.substring(cur_location.length - 1, cur_location.length)) !== -1)
+            cur_location = cur_location.substring(0, cur_location.length - 1);
+        window.history.replaceState({}, '', cur_location)
+    })
+
 </script>
 
 </html>
