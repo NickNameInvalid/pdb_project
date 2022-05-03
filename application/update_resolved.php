@@ -28,11 +28,11 @@ $stmt->bind_result($status);
 $stmt->fetch();
 
 if ($status == "unsolved") {
-    $sql = "update Question 
+    $sql = "update Questions 
             set status = 'resolved'
             where qid = ?";
 } else {
-    $sql = "update Question 
+    $sql = "update Questions 
             set status = 'unsolved'
             where qid = ?";
 }
