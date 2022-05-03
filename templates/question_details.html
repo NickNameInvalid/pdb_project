@@ -108,7 +108,7 @@
     function get_question_detail()
     {
         get_data = {}
-        let qid = GetQueryString('qid');
+        let qid = HTMLEncode(GetQueryString('qid'));
         if(qid != null && qid.length > 0) get_data['qid'] = qid;
         $.ajax({
             url: "../application/get_cur_question.php",
@@ -136,7 +136,7 @@
     function get_answer_detail()
     {
         get_data = {}
-        let qid = GetQueryString('qid');
+        let qid = HTMLEncode(GetQueryString('qid'));
         if(qid != null && qid.length > 0) get_data['qid'] = qid;
         $.ajax({
             url: "../application/get_answers.php",

@@ -198,7 +198,7 @@
 
     $("#profile").ready(function (){
         get_data = {}
-        let p_user = GetQueryString('p_user');
+        let p_user = HTMLEncode(GetQueryString('p_user'));
         if(p_user != null && p_user.length > 0) get_data['p_user'] = p_user;
         update_user_profile(get_data);
     });

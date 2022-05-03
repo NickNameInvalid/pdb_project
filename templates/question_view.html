@@ -14,10 +14,10 @@
 
     $("#card_list_container").ready(function (){
         get_data = {}
-        let gtid = GetQueryString('gtid');
-        let stid = GetQueryString('stid');
-        let key = GetQueryString('key');
-        let stype = GetQueryString('stype');
+        let gtid = HTMLEncode(GetQueryString('gtid'));
+        let stid = HTMLEncode(GetQueryString('stid'));
+        let key = HTMLEncode(GetQueryString('key'));
+        let stype = HTMLEncode(GetQueryString('stype'));
         if(gtid != null && gtid.length > 0) get_data['gtid'] = gtid;
         if(stid != null && stid.length > 0) get_data['stid'] = stid;
         if(key != null && key.length > 0) get_data['key'] = key;
