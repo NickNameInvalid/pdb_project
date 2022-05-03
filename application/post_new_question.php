@@ -11,7 +11,7 @@ $mysqli = establish_conn();
 $user = $_SESSION['username'];
 $stid = number_format($_POST['stid']);
 $title = $_POST['title'];
-$body = $_POST['body'] ?? "System remind: This user does set a question body!";
+$body = $_POST['body'] ?? "System remind: This user did not set a question body!";
 if($stid == "dft")
 {
     echo "<script>alert('Please set a subject topic!')</script>";
