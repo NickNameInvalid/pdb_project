@@ -4,9 +4,9 @@ session_start();
 $mysqli = establish_conn();
 $aid = $_POST['aid'];
 $p_user = $_POST['p_user'];
-$c_user = $_SESSION['username'] ?? "dft";
+$c_user = $_SESSION['username'] ?? "";
 
-if ($c_user == "dft") {
+if (empty($c_user)) {
     echo "<script>alert('You have not logged in!')</script>";
     return;
 }

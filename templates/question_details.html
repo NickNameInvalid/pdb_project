@@ -72,6 +72,7 @@
 </div>
 
 <div class="modal fade" id="delcfmModel">
+    <p hidden id="modal_aid"></p>
     <div class="modal-dialog">
         <div class="modal-content message_align">
             <div class="modal-header">
@@ -181,6 +182,7 @@
             $(is_liked_id).html(1);
             $(img_id).attr("src", "../framework/bootstrap-icons-1.8.1/hand-thumbs-up-fill.svg")
         }
+        update_thumb_ups(aid);
     });
 
     body_obj.on("click", ".ba_btn", function (){
@@ -215,14 +217,66 @@
         }
     })
 
+    function save_edit_answer(aid, p_user, body)
+    {
+        $.ajax({
+            url: "../application/edit_answer.php",
+            type: "post",
+            data: {'aid': aid, 'p_user': p_user, 'body': body},
+            success: function (data) {
+                $('#a_alert_dummy').html(data);
+                get_answer_detail();
+            },
+            error: function (data){
+                console.warn(data);
+            }
+        });
+    }
+
+    function update_thumb_ups(aid)
+    {
+        $.ajax({
+            url: "../application/update_thumb_ups.php",
+            type: "post",
+            data: {'aid': aid},
+            success: function (data) {
+                $('#a_alert_dummy').html(data);
+            },
+            error: function (data){
+                console.warn(data);
+            }
+        });
+    }
+
+    function save_edit_question(qid, p_user, body)
+    {
+        $.ajax({
+            url: "../application/edit_question.php",
+            type: "post",
+            data: {'qid': qid, 'p_user': p_user, 'body': body},
+            success: function (data) {
+                $('#a_alert_dummy').html(data);
+                get_answer_detail();
+            },
+            error: function (data){
+                console.warn(data);
+            }
+        });
+    }
+
     $("#edit_q_btn").on("click", function (){
         let obj_tag = $("#edit_status");
-        let editting = Number(obj_tag.text())
+        let editting = Number(obj_tag.text());
+        let p_user = $("#username_tmp").text();
         if(editting)
         {
             obj_tag.html(0);
             $("#img_edit").attr("src", "../framework/bootstrap-icons-1.8.1/pencil-square.svg")
-            $("#q_body").removeClass('edit_body').addClass('preview_body').attr("contenteditable", "false");
+            let qb_obj = $("#q_body");
+            qb_obj.removeClass('edit_body').addClass('preview_body').attr("contenteditable", "false");
+            let new_body = qb_obj.text();
+            let qid = $("#qid_tmp").text();
+            save_edit_question(qid, p_user, new_body);
         }
         else
         {
@@ -237,12 +291,15 @@
         let img_id = "#edit_img_" + aid;
         let edit_status_id = "#editting_" + aid;
         let body_id = "#answer_body_" + aid;
+        let p_user = $("#username_tmp").text();
         let editting = Number($(edit_status_id).text())
         if(editting)
         {
             $(edit_status_id).html(0);
             $(img_id).attr("src", "../framework/bootstrap-icons-1.8.1/pencil-square.svg")
             $(body_id).removeClass('edit_body').addClass('preview_body').attr("contenteditable", "false");
+            let new_body = $(body_id).text();
+            save_edit_answer(aid, p_user, new_body);
         }
         else
         {
@@ -271,11 +328,32 @@
         });
     })
 
-    body_obj.on("click", ".a_delete_btn", function (){
-        $('#delcfmModel').modal({ backdrop: 'static', keyboard: false })
-            .on('click', '#btnOkDelete', function() {
+    function delete_answer(aid, p_user)
+    {
+        $.ajax({
+            url: "../application/delete_answer.php",
+            type: "post",
+            data: {'aid': aid, 'p_user': p_user},
+            success: function (data) {
+                $('#a_alert_dummy').html(data);
+                get_answer_detail();
+            },
+            error: function (data){
+                console.warn(data);
+            }
+        });
+    }
 
-            });
+    $("#btnOkDelete").on("click", function (){
+        let aid = $("#modal_aid").text();
+        let p_user = $("#username_tmp").text();
+        delete_answer(aid, p_user);
+    })
+
+    body_obj.on("click", ".a_delete_btn", function (){
+        let aid = $(this).attr("id").replace("delete_", "");
+        $("#modal_aid").html(aid);
+        $('#delcfmModel').modal({ backdrop: 'static', keyboard: false })
     })
 
 </script>

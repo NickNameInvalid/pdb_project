@@ -4,12 +4,12 @@ session_start();
 $mysqli = establish_conn();
 $qid = $_POST['qid'];
 $p_user = $_POST['p_user'];
-$title = $_POST['title'];
+$title = $_POST['title'] ?? "";
 $body = $_POST['body'];
-$c_user = $_SESSION['username'] ?? "dft";
+$c_user = $_SESSION['username'] ?? "";
 $time = date('Y-m-d H:i:s');
 
-if ($c_user == "dft") {
+if ($c_user == "") {
     echo "<script>alert('You have not logged in!')</script>";
     return;
 }
@@ -20,11 +20,11 @@ if ($c_user != $p_user) {
 }
 
 $sql = "update Questions 
-        set title = ?, q_body = ?, post_time = ?
+        set q_body = ?, post_time = ?
         where qid = ?";
 
 $stmt = $mysqli->prepare($sql);
-$stmt->bind_param("sssi", $title, $body, $time, $qid);
+$stmt->bind_param("ssi", $body, $time, $qid);
 try
 {
     $stmt -> execute();
