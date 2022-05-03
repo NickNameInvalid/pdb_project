@@ -8,8 +8,10 @@ $keywd = htmlspecialchars_decode($_GET['key'] ?? "");
 $stype = $_GET['stype'] ?? "dft";
 $params = Array();
 $param_type = "";
-if($stype != "qs" or $stype != "as")
+if($stype != "qs" && $stype != "as")
+{
     $stype = "qs";
+}
 if(empty($keywd))
 {
     if($stype == "dft" || $stype == "qs") {
@@ -62,7 +64,7 @@ if(empty($keywd))
 }
 else
 {
-    if($stype == "dft" || $stype == "qs") {
+    if($stype === "dft" || $stype === "qs") {
         $sql_text = <<<dochere
         select qid, q_username, concat(gtname, ' / ', stname) as topics , title, q_body, post_time, status from(
         select qid, q_username, title, q_body, post_time, match (q_body) against (? with query expansion) as score, 0.0 as weight, stid, status, q_visible_status from questions
@@ -99,8 +101,13 @@ else
         $stmt->bind_param($param_type, ...$params);
         $stmt -> execute();
         $stmt->bind_result($qid, $u, $tc, $tt, $bd, $pt, $st);
+        $stmt->store_result();
+        if($stmt->num_rows() === 0)
+        {
+            echo "<h4 class='mb-2'>No result question found!</h4>";
+        }
     }
-    else if ($stype == "as"){
+    else if ($stype === "as"){
         $sql_text = <<<dochere
         select aid, qid, concat(gtname, ' / ', stname) as topics, a_username, title, a_body, thumb_ups, answer_time, best_answer from(
         select aid, qid, a_username, a_body, thumb_ups, answer_time, best_answer, match (a_body) against (? with query expansion) as score, 0.0 as weight, a_visible_status from answers
@@ -130,6 +137,11 @@ else
         $stmt->bind_param($param_type, ...$params);
         $stmt -> execute();
         $stmt->bind_result($aid, $qid, $tc, $au, $tt, $ab, $tu, $at, $ba);
+        $stmt->store_result();
+        if($stmt->num_rows() === 0)
+        {
+            echo "<h4 class='mb-2'>No result answer found!</h4>";
+        }
     }
 
 }

@@ -22,6 +22,11 @@ if ($stmt = $mysqli->prepare($sql)) {
     $stmt->bind_param("i", $qid);
     $stmt->execute();
     $stmt->bind_result($aid, $a_user, $a_body, $thumb_ups, $a_time, $best);
+    $stmt->store_result();
+    if($stmt->num_rows === 0)
+    {
+        echo "<h4 class='mb-2'>No answers posted for this question!</h4>";
+    }
 
     while($stmt->fetch()) {
         $check_like = $check_like_sqli->prepare("select exists(select * from likes where username=? and aid=? and like_status = 1)");
