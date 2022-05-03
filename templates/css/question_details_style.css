@@ -55,3 +55,8 @@
     bottom: 100px;
     right: 100px;
 }
+
+.edit_body
+{
+    border: 1px solid #007bff;
+}

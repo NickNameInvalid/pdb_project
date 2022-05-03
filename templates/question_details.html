@@ -26,7 +26,7 @@
         <div class="card-body">
             <h4 class="card-title" id="q_title">Question Title</h4>
             <div class="dropdown-divider"></div>
-            <p class="card-text detail_body" id="q_body" contenteditable="false">Question Body</p>
+            <p class="card-text detail_body preview_body" id="q_body" contenteditable="false">Question Body</p>
             <div class="post_time d-flex gap-lg-5">
                 <div class="p-2 user_post" id="q_user">user</div>
                 <div class="p-2 time_post" id="q_time">time</div>
@@ -36,7 +36,8 @@
                     <div class="p-0 question_status" id="q_status" hidden></div>
                 </button>
                 <button type="button" class="btn btn-default" id="edit_q_btn" style="height: 40px;vertical-align:middle;display: none">
-                    <img src="../framework/bootstrap-icons-1.8.1/pencil-square.svg" alt="edit">
+                    <img src="../framework/bootstrap-icons-1.8.1/pencil-square.svg" alt="edit" id="img_edit">
+                    <div class="p-0 question_status" id="edit_status" hidden></div>
                 </button>
             </div>
         </div>
@@ -81,10 +82,6 @@
         $("#answer_question_model").modal();
     });
 
-    $("#answer_float_btn").on("mouseenter", function (){
-        $("#answer_float_btn").tooltip();
-    });
-
     $(document).ready(function (){
         $("#head_container").load('header.html');
     });
@@ -107,6 +104,7 @@
                 $("#q_time").html(data_json.q_time);
                 $("#q_topics").html(data_json.q_topics);
                 $("#q_status").html(data_json.q_status);
+                $("#edit_status").html(0);
                 $("#edit_q_btn").attr("style",data_json.editable ? "display:block;" : "display:none;");
                 $("#img_solve").attr("src", data_json.q_status === "resolved" ? "../framework/bootstrap-icons-1.8.1/check-square.svg" : "../framework/bootstrap-icons-1.8.1/x-square.svg")
             },
@@ -136,21 +134,86 @@
 
     $("#question_container").ready(function (){
         get_question_detail();
-    })
+    });
 
     $("#answer_list_container").ready(function (){
         get_answer_detail();
-    })
+    });
 
     body_obj.on("click", '.user_post', function (){
         window.location.href = "profile.html?p_user=" + $(this).text();
+    });
+
+    body_obj.on("click", ".like_btn", function (){
+        let aid = $(this).attr("id").replace("like_", "")
+        let img_id = "#like_img_" + aid;
+        let num_id = "#like_num_" + aid;
+        let is_liked_id = "#is_liked_" + aid;
+        let num_count = Number($(num_id).text());
+        let like_status = Number($(is_liked_id).text());
+        if(like_status)
+        {
+            $(num_id).html(num_count - 1);
+            $(is_liked_id).html(0);
+            $(img_id).attr("src", "../framework/bootstrap-icons-1.8.1/hand-thumbs-up.svg")
+        }
+        else
+        {
+            $(num_id).html(num_count + 1);
+            $(is_liked_id).html(1);
+            $(img_id).attr("src", "../framework/bootstrap-icons-1.8.1/hand-thumbs-up-fill.svg")
+        }
+    });
+
+    body_obj.on("click", ".ba_btn", function (){
+        let aid = $(this).attr("id").replace("best_", "")
+        let img_id = "#best_img_" + aid;
+        let is_best_id = "#is_best_" + aid;
+        let best_status = Number($(is_best_id).text());
+        if(best_status)
+        {
+            $(is_best_id).html(0);
+            $(img_id).attr("src", "../framework/bootstrap-icons-1.8.1/trophy.svg");
+        }
+        else
+        {
+            $(is_best_id).html(1);
+            $(img_id).attr("src", "../framework/bootstrap-icons-1.8.1/trophy-fill.svg");
+        }
+    });
+
+    $("#solve_q_btn").on("click", function (){
+        let obj_tag = $("#q_status");
+        let solved = Number(obj_tag.text())
+        if(solved)
+        {
+            obj_tag.html(0);
+            $("#img_solve").attr("src", "../framework/bootstrap-icons-1.8.1/x-square.svg")
+        }
+        else
+        {
+            obj_tag.html(1);
+            $("#img_solve").attr("src", "../framework/bootstrap-icons-1.8.1/check-square.svg")
+        }
     })
 
-    body_obj.on("click", '.thumb_ups', function (){
-        post_data = {}
-        let qid = GetQueryString('qid');
-        if(qid != null && qid.length > 0) post_data['qid'] = qid;
+    $("#edit_q_btn").on("click", function (){
+        let obj_tag = $("#edit_status");
+        let editting = Number(obj_tag.text())
+        if(editting)
+        {
+            obj_tag.html(0);
+            $("#img_edit").attr("src", "../framework/bootstrap-icons-1.8.1/pencil-square.svg")
+            $("#q_body").removeClass('edit_body').addClass('preview_body').attr("contenteditable", "false");
+        }
+        else
+        {
+            obj_tag.html(1);
+            $("#img_edit").attr("src", "../framework/bootstrap-icons-1.8.1/save.svg")
+            $("#q_body").removeClass('preview_body').addClass('edit_body').attr("contenteditable", "true");
+        }
     })
+
 
     $('#btn_post_answer').on("click", function () {
         post_data = {}

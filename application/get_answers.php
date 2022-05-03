@@ -49,15 +49,16 @@ if ($stmt = $mysqli->prepare($sql)) {
                     <div class="post_time d-flex gap-lg-5">
                         <div class="p-2 user_post">$a_user</div>
                         <div class="p-2 time_post">$a_time</div>
-                        <button type="button" class="btn btn-default thumb_ups_cls" id="like_$aid" style="height: 40px;vertical-align:middle;">
+                        <button type="button" class="btn btn-default like_btn" id="like_$aid" style="height: 40px;vertical-align:middle;">
                             <div class="d-flex gap-1">
-                                <img src=$like_img_path alt="like number">
-                                <div class="p-0" id="thumb_ups_$aid">$thumb_ups</div>
+                                <img src=$like_img_path alt="like number" id="like_img_$aid">
+                                <div class="p-0" id="like_num_$aid">$thumb_ups</div>
+                                <p class="p-2" id="is_liked_$aid" hidden>$isliked</p>
                             </div>
                         </button>
-                        <button type="button" class="btn btn-default" id="best_$aid" style="height: 40px;vertical-align:middle;">
-                                <img src=$best_answer alt="best answer status">
-                                <div class="p-0 best_tip" hidden></div>
+                        <button type="button" class="btn btn-default ba_btn" id="best_$aid" style="height: 40px;vertical-align:middle;">
+                                <img src=$best_answer alt="best answer status" id="best_img_$aid">
+                                <p class="p-2" id="is_best_$aid" hidden>$best</p>
                         </button>
                         <button type="button" class="btn btn-default" id="edit_$aid" style="height: 40px;vertical-align:middle;$editable">
                             <img src="../framework/bootstrap-icons-1.8.1/pencil-square.svg" alt="edit answer">
