@@ -56,7 +56,8 @@
         $("#head_container").load('header.html');
     });
 
-    $("#question_container").ready(function (){
+    function get_question_detail()
+    {
         get_data = {}
         let qid = GetQueryString('qid');
         if(qid != null && qid.length > 0) get_data['qid'] = qid;
@@ -80,9 +81,10 @@
                 console.warn(data);
             }
         });
-    })
+    }
 
-    $("#answer_list_container").ready(function (){
+    function get_answer_detail()
+    {
         get_data = {}
         let qid = GetQueryString('qid');
         if(qid != null && qid.length > 0) get_data['qid'] = qid;
@@ -97,6 +99,14 @@
                 console.warn(data);
             }
         });
+    }
+
+    $("#question_container").ready(function (){
+        get_question_detail();
+    })
+
+    $("#answer_list_container").ready(function (){
+        get_answer_detail();
     })
 
     body_obj.on("click", '.user_post', function (){

@@ -13,7 +13,7 @@ if (empty($qid)) {
 $sql = "select aid, a_username, a_body, thumb_ups, answer_time, best_answer 
         from answers natural join questions
         where qid = ? and a_visible_status = 1
-        order by answer_time desc, thumb_ups desc";
+        order by best_answer desc, answer_time desc, thumb_ups desc";
 
 echo "<h4 class='mb-2'>Answers</h4>";
 if ($stmt = $mysqli->prepare($sql)) {
