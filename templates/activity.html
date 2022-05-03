@@ -45,5 +45,11 @@
             }
         });
     })
+
+    $('body').on("click", '.title_link', function (){
+        var qid = $(this).attr("id").replace("cqid_", "");
+        window.location.href = "question_details.html?qid=" + qid;
+    })
+
 </script>
 </html>

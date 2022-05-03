@@ -3,7 +3,7 @@ include('mysqlidb.php');
 session_start();
 $mysqli = establish_conn();
 $qid = $_GET['qid'] ?? "";
-$cur_user = $_SESSION['username'];
+$cur_user = $_SESSION['username'] ?? "";
 
 if (empty($qid)) {
     return;
