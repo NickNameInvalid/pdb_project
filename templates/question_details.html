@@ -32,7 +32,7 @@
                 <div class="p-2 time_post" id="q_time">time</div>
                 <div class="p-2 post_topics" id="q_topics">g_topic & s_topic</div>
                 <button type="button" class="btn btn-default" id="solve_q_btn" style="height: 40px;vertical-align:middle;">
-                    <img src="../framework/bootstrap-icons-1.8.1/check-square.svg" alt="solve status">
+                    <img src="../framework/bootstrap-icons-1.8.1/check-square.svg" alt="solve status" id="img_solve">
                     <div class="p-0 question_status" id="q_status" hidden></div>
                 </button>
                 <button type="button" class="btn btn-default" id="edit_q_btn" style="height: 40px;vertical-align:middle;display: none">
@@ -74,6 +74,7 @@
                 $("#q_topics").html(data_json.q_topics);
                 $("#q_status").html(data_json.q_status);
                 $("#edit_q_btn").attr("style",data_json.editable ? "display:block;" : "display:none;");
+                $("#img_solve").attr("src", data_json.q_status === "resolved" ? "../framework/bootstrap-icons-1.8.1/check-square.svg" : "../framework/bootstrap-icons-1.8.1/x-square.svg")
             },
             error: function (data){
                 console.warn(data);
@@ -107,6 +108,8 @@
         let qid = GetQueryString('qid');
         if(qid != null && qid.length > 0) post_data['qid'] = qid;
     })
+
+
 
 </script>
 
