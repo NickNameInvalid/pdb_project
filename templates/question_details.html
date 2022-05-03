@@ -35,7 +35,7 @@
                     <img src="../framework/bootstrap-icons-1.8.1/check-square.svg" alt="solve status">
                     <div class="p-0 question_status" id="q_status" hidden></div>
                 </button>
-                <button type="button" class="btn btn-default" id="edit_q_btn" style="height: 40px;vertical-align:middle;">
+                <button type="button" class="btn btn-default" id="edit_q_btn" style="height: 40px;vertical-align:middle;display: none">
                     <img src="../framework/bootstrap-icons-1.8.1/pencil-square.svg" alt="edit">
                 </button>
             </div>
@@ -45,6 +45,7 @@
 </div>
 
 <div class="container gap-3" id="answer_list_container"></div>
+<p hidden id="qid_tmp"></p>
 
 </body>
 
@@ -65,12 +66,14 @@
             data: get_data,
             success: function (data) {
                 let data_json = $.parseJSON(data);
+                $("#qid_tmp").html(data_json.qid);
                 $("#q_title").html(data_json.q_title);
                 $("#q_body").html(data_json.q_body);
                 $("#q_user").html(data_json.q_user);
                 $("#q_time").html(data_json.q_time);
                 $("#q_topics").html(data_json.q_topics);
                 $("#q_status").html(data_json.q_status);
+                $("#edit_q_btn").attr("style",data_json.editable ? "display:block;" : "display:none;");
             },
             error: function (data){
                 console.warn(data);

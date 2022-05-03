@@ -138,9 +138,9 @@ while($stmt->fetch())
 {
     if($stype == "dft" || $stype == "qs"){
         echo <<<heredoc
-            <div class="card mb-3" id="qid_$qid">
+            <div class="card mb-3">
                 <div class="card-body">
-                    <h4 class="card-title title_link">$tt</h4>
+                    <h4 class="card-title title_link" id="cqid_$qid">$tt</h4>
                     <div class="dropdown-divider"></div>
                     <p class="card-text">$bd</p>
                     <div class="post_time d-flex gap-lg-5">
@@ -157,10 +157,10 @@ while($stmt->fetch())
     {
         $ba_str = number_format($ba) == 1 ? "Best Answer" : "";
         echo <<<heredoc
-            <div class="card mb-3" id="qid_$qid">
+            <div class="card mb-3">
                 <div class="card-body">
                     <p hidden id="main_aid_$aid">
-                    <h4 class="card-title title_link">Q: {$tt}</h4>
+                    <h4 class="card-title title_link" id="cqid_$qid">Q: {$tt}</h4>
                     <div class="dropdown-divider"></div>
                     <p class="card-text">A: {$ab}</p>
                     <div class="post_time d-flex gap-lg-5">

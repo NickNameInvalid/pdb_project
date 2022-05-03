@@ -14,9 +14,9 @@ while($stmt->fetch())
 {
     $ba_str = number_format($bestanswer) == 1 ? "Best Answer" : "";
     echo <<<dochere
-        <div class="card mb-3" id="qid_$qid">
+        <div class="card mb-3">
             <div class="card-body">
-                <h4 class="card-title title_link">Q: $title</h4>
+                <h4 class="card-title title_link" id="cqid_$qid">Q: $title</h4>
                 <div class="dropdown-divider"></div>
                 <p class="card-text">A: $body</p>
                 <div class="post_time d-flex gap-lg-5">

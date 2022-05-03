@@ -11,9 +11,9 @@ echo "<h4>Question Posted</h4>";
 while($stmt->fetch())
 {
     echo <<<dochere
-        <div class="card mb-3" id="act_qid_$qid">
+        <div class="card mb-3">
             <div class="card-body">
-                <h4 class="card-title title_link">$title</h4>
+                <h4 class="card-title title_link" id="cqid_$qid">$title</h4>
                 <div class="dropdown-divider"></div>
                 <p class="card-text view_body">$body</p>
                 <div class="post_time d-flex gap-lg-5">

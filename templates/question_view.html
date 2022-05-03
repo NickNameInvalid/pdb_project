@@ -10,6 +10,8 @@
 </body>
 <script type="text/javascript">
 
+    let body_obj =  $('body');
+
     $("#card_list_container").ready(function (){
         get_data = {}
         let gtid = GetQueryString('gtid');
@@ -33,9 +35,16 @@
         });
     })
 
-    $('body').on("click", '.user_post', function (){
+    body_obj.on("click", '.user_post', function (){
         window.location.href = "profile.html?p_user=" + $(this).text();
     })
+
+    body_obj.on("click", '.title_link', function (){
+        var qid = $(this).attr("id").replace("cqid_", "");
+        window.location.href = "question_details.html?qid=" + qid;
+    })
+
+
 
 </script>
 </html>

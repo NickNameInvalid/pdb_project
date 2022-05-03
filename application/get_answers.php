@@ -2,18 +2,18 @@
 include('mysqlidb.php');
 session_start();
 $mysqli = establish_conn();
-$qid = $_GET['qid'] ?? "dft";
+$qid = $_GET['qid'] ?? "";
+$cur_user = $_SESSION['username'];
 
-$qid = 7;
-
-if ($qid == "dft") {
+if (empty($qid)) {
     return;
 }
+
 
 $sql = "select aid, a_username, a_body, thumb_ups, answer_time, best_answer 
         from answers natural join questions
         where qid = ? and a_visible_status = 1
-        order by answer_time desc";
+        order by answer_time desc, thumb_ups desc";
 
 echo "<h4 class='mb-2'>Answers</h4>";
 if ($stmt = $mysqli->prepare($sql)) {
@@ -27,6 +27,8 @@ if ($stmt = $mysqli->prepare($sql)) {
         } else {
             $hd = "";
         }
+
+        $editable = $cur_user == $a_user ? "display:block;" : "display:none;";
         echo <<< heredoc
             <div class="card mb-3">
                 <div class="card-body">
@@ -45,7 +47,7 @@ if ($stmt = $mysqli->prepare($sql)) {
                                 <img src="../framework/bootstrap-icons-1.8.1/trophy.svg" alt="best answer status">
                                 <div class="p-0 best_tip" hidden></div>
                         </button>
-                        <button type="button" class="btn btn-default" id="edit_$aid" style="height: 40px;vertical-align:middle;">
+                        <button type="button" class="btn btn-default" id="edit_$aid" style="height: 40px;vertical-align:middle;$editable">
                             <img src="../framework/bootstrap-icons-1.8.1/pencil-square.svg" alt="edit answer">
                         </button>
                     </div>
