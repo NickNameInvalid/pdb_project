@@ -13,7 +13,7 @@ if ($c_user == "") {
 }
 
 if ($c_user != $p_user) {
-    echo "<script>alert('You cannot set resolved because you are not the owner of this question!')</script>";
+//    echo "<script>alert('You cannot set resolved because you are not the owner of this question!')</script>";
     return;
 }
 

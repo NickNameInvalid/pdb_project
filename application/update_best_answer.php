@@ -6,15 +6,15 @@ $myupdate = establish_conn();
 $aid = $_POST['aid'];
 $qid = $_POST['qid'];
 $p_user = $_POST['p_user'];
-$c_user = $_SESSION['username'] ?? "dft";
+$c_user = $_SESSION['username'] ?? "";
 
-if ($c_user == "dft") {
+if ($c_user == "") {
     echo "<script>alert('You have not logged in!')</script>";
     return;
 }
 
 if ($c_user != $p_user) {
-    echo "<script>alert('You cannot set best answer because you are not the owner of this question!')</script>";
+//    echo "<script>alert('You cannot set best answer because you are not the owner of this question!')</script>";
     return;
 }
 
@@ -46,6 +46,7 @@ if ($cur_best == null || $cur_best != $aid) {
     $update = $myupdate->prepare($sql);
     $update->bind_param("i", $aid);
     $update->execute();
+    echo "<script>alert('Set new best answer successfully!')</script>";
 }
 
 $update->close();
