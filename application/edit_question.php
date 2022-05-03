@@ -28,7 +28,7 @@ $stmt->bind_param("ssi", $body, $time, $qid);
 try
 {
     $stmt -> execute();
-    echo "<script>alert('Edited a question!')</script>";
+    echo "<script>alert('Save successfully!')</script>";
 }
 catch (mysqli_sql_exception $e)
 {
