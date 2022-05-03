@@ -29,6 +29,7 @@ if ($stmt = $mysqli->prepare($sql)) {
         }
 
         $editable = $cur_user == $a_user ? "display:block;" : "display:none;";
+        $best_answer = $best ? "../framework/bootstrap-icons-1.8.1/trophy-fill.svg" : "../framework/bootstrap-icons-1.8.1/trophy.svg";
         echo <<< heredoc
             <div class="card mb-3">
                 <div class="card-body">
@@ -44,7 +45,7 @@ if ($stmt = $mysqli->prepare($sql)) {
                             </div>
                         </button>
                         <button type="button" class="btn btn-default" id="best_$aid" style="height: 40px;vertical-align:middle;">
-                                <img src="../framework/bootstrap-icons-1.8.1/trophy.svg" alt="best answer status">
+                                <img src=$best_answer alt="best answer status">
                                 <div class="p-0 best_tip" hidden></div>
                         </button>
                         <button type="button" class="btn btn-default" id="edit_$aid" style="height: 40px;vertical-align:middle;$editable">
