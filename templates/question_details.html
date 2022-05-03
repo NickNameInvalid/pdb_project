@@ -45,7 +45,20 @@
     <br>
 </div>
 
-<div class="container gap-3" id="answer_list_container"></div>
+<div id="answer_container">
+    <div id="filter_container" style="margin-left: 630px">
+        <h4 class='mb-2'>Answers</h4>
+        <div>
+            <img src="../framework/bootstrap-icons-1.8.1/filter-square.svg" style="zoom: 140%;padding-bottom: 3px;">
+            <select class="mb-3" id="order_select">
+                <option selected>Order by Time</option>
+                <option>Order by Likes</option>
+            </select>
+        </div>
+    </div>
+    <div class="container gap-3" id="answer_list_container"></div>
+</div>
+
 <p hidden id="qid_tmp"></p>
 
 <div class="modal fade" id="answer_question_model" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
@@ -420,6 +433,25 @@
         let aid = $(this).attr("id").replace("delete_", "");
         $("#modal_aid").html(aid);
         $('#delcfmModel').modal({ backdrop: 'static', keyboard: false })
+    })
+
+    body_obj.on("change", "#order_select",function (){
+        let sel_index = document.getElementById('order_select').selectedIndex;
+        get_data = {}
+        let qid = HTMLEncode(GetQueryString('qid'));
+        if(qid != null && qid.length > 0) get_data['qid'] = qid;
+        get_data['order_by'] = sel_index;
+        $.ajax({
+            url: "../application/get_answers.php",
+            type: "get",
+            data: get_data,
+            success: function (data) {
+                $("#answer_list_container").html(data);
+            },
+            error: function (data){
+                console.warn(data);
+            }
+        });
     })
 
 </script>

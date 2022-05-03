@@ -5,19 +5,29 @@ $mysqli = establish_conn();
 $check_like_sqli = establish_conn();
 $qid = $_GET['qid'] ?? "";
 $cur_user = $_SESSION['username'] ?? "";
+$order_method = $_GET['order_by'] ?? 0;
+echo $order_method;
 
 if (empty($qid)) {
     return;
 }
 
-
 $sql = "select aid, a_username, a_body, thumb_ups, answer_time, best_answer 
         from answers natural join questions
         where qid = ? and a_visible_status = 1
-        order by best_answer desc, answer_time desc, thumb_ups desc";
+        order by best_answer desc";
 
+if($order_method == 0)
+{
+    $order_sql = ", answer_time desc, thumb_ups desc";
+}
+else
+{
+    $order_sql = ", thumb_ups desc, answer_time desc";
+}
 
-echo "<h4 class='mb-2'>Answers</h4>";
+$sql .= $order_sql;
+
 if ($stmt = $mysqli->prepare($sql)) {
     $stmt->bind_param("i", $qid);
     $stmt->execute();
