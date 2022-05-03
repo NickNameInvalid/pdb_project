@@ -3,11 +3,7 @@ include('mysqlidb.php');
 session_start();
 $mysqli = establish_conn();
 $qid = $_GET['qid'] ?? "";
-$user = $_SESSION['username'];
-
-if ($qid == "") {
-    return;
-}
+$user = $_SESSION['username'] ?? "";
 
 $sql = "select qid, q_username, concat(gtname, ' / ', stname) as topics , title, q_body, post_time, status 
         from questions natural join subjecttopics natural join generaltopics 
