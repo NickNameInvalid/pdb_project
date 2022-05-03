@@ -6,7 +6,6 @@ $check_like_sqli = establish_conn();
 $qid = $_GET['qid'] ?? "";
 $cur_user = $_SESSION['username'] ?? "";
 $order_method = $_GET['order_by'] ?? 0;
-echo $order_method;
 
 if (empty($qid)) {
     return;
