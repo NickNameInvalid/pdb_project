@@ -11,7 +11,8 @@ if($pword1 === $pword2)
     try
     {
         $sql -> execute();
-        header('Location: ../templates/main.html');
+        echo "Success!";
+//        header('Location: ../templates/main.html');
     }
     catch (mysqli_sql_exception $e)
     {
