@@ -20,6 +20,8 @@ if(!$user_check->num_rows)
 {
     echo "User Does not exist! Check your username!";
     $mysqli->close();
+    $user_check->close();
+//    header('Location: ../templates/login.html');
     return;
 }
 
@@ -27,11 +29,13 @@ $user_check->fetch();
 if($password_hash == $pass)
 {
     $_SESSION['username'] = $user;
-    header('Location: ../templates/main.html');
+    echo "Success!";
+//    header('Location: ../templates/main.html');
 }
 else
 {
     echo "Password does not match! Try it again!";
+//    header('Location: ../templates/login.html');
 }
 
 $mysqli->close();

@@ -7,7 +7,7 @@ $aid = $_POST['aid'];
 $user = $_SESSION['username'] ?? "";
 
 if ($user == "") {
-    echo "<script>alert('You have not logged in!')</script>";
+//    echo "<script>alert('You have not logged in!')</script>";
     return;
 }
 

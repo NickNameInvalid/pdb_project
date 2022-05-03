@@ -164,6 +164,12 @@
     });
 
     body_obj.on("click", ".like_btn", function (){
+        let c_user = $("#username_tmp").text();
+        if(c_user.length === 0)
+        {
+            alert("You are not login!");
+            return;
+        }
         let aid = $(this).attr("id").replace("like_", "")
         let img_id = "#like_img_" + aid;
         let num_id = "#like_num_" + aid;
@@ -190,6 +196,11 @@
         let img_id = "#best_img_" + aid;
         let c_user = $("#username_tmp").text();
         let p_user = $("#q_user").text();
+        if(c_user.length === 0)
+        {
+            alert("You are not login!");
+            return;
+        }
         if(c_user !== p_user) {
             alert("You are not the question owner! You cannot edit the best answer!");
             return;
@@ -232,6 +243,11 @@
         let solved = Number(obj_tag.text());
         let c_user = $("#username_tmp").text();
         let p_user = $("#q_user").text();
+        if(c_user.length === 0)
+        {
+            alert("You are not login!");
+            return;
+        }
         if(p_user !== c_user)
         {
             alert("You are not the question owner! You cannot set status for this question!");

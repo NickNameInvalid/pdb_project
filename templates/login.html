@@ -10,7 +10,7 @@
 <body>
 <h3 style="text-align:center;" class="mt-3">Welcome! Please login!</h3>
 <div class="container col-md-3 center-block">
-<form role="form" method="POST" action="../application/login.php">
+<form role="form" method="POST" id="login_form" onsubmit="login()">
     <div class="form-group mt-3">
         <label for="username">Enter your username</label>
         <input type="text" required="required" class="form-control input-sm mt-3" id="username" name="login_user" placeholder="Please Input username">
@@ -32,6 +32,26 @@
         $(location).attr("href","register.html")
     })
 
+    function login() {
+        $.ajax({
+            url: "../application/login.php",
+            type: "post",
+            data: $("#login_form").serialize(),
+            success: function (data) {
+                if(data === "Success!")
+                {
+                    window.location.href = "../templates/main.html"
+                }
+                else
+                {
+                    alert(data);
+                }
+            },
+            error: function (data){
+                console.warn(data);
+            }
+        });
+    }
 </script>
 </body>
 </html>
