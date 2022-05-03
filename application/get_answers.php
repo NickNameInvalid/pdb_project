@@ -24,7 +24,7 @@ if ($stmt = $mysqli->prepare($sql)) {
     $stmt->bind_result($aid, $a_user, $a_body, $thumb_ups, $a_time, $best);
 
     while($stmt->fetch()) {
-        $check_like = $check_like_sqli->prepare("select exists(select * from likes where username=? and aid=?)");
+        $check_like = $check_like_sqli->prepare("select exists(select * from likes where username=? and aid=? and like_status = 1)");
         $check_like->bind_param("si", $cur_user, $aid);
         $check_like->execute();
         $check_like->bind_result($isliked);
