@@ -119,6 +119,11 @@
         if(qid != null && qid.length > 0) post_data['qid'] = qid;
     })
 
+    body_obj.on("click", '.thumb_ups_cls', function (){
+        post_data = {}
+        let qid = GetQueryString('qid');
+        if(qid != null && qid.length > 0) post_data['qid'] = qid;
+    })
 
 
 </script>

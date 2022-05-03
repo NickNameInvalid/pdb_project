@@ -2,6 +2,7 @@
 include('mysqlidb.php');
 session_start();
 $mysqli = establish_conn();
+$check_like_sqli = establish_conn();
 $qid = $_GET['qid'] ?? "";
 $cur_user = $_SESSION['username'] ?? "";
 
@@ -15,6 +16,7 @@ $sql = "select aid, a_username, a_body, thumb_ups, answer_time, best_answer
         where qid = ? and a_visible_status = 1
         order by best_answer desc, answer_time desc, thumb_ups desc";
 
+
 echo "<h4 class='mb-2'>Answers</h4>";
 if ($stmt = $mysqli->prepare($sql)) {
     $stmt->bind_param("i", $qid);
@@ -22,6 +24,15 @@ if ($stmt = $mysqli->prepare($sql)) {
     $stmt->bind_result($aid, $a_user, $a_body, $thumb_ups, $a_time, $best);
 
     while($stmt->fetch()) {
+        $check_like = $check_like_sqli->prepare("select exists(select * from likes where username=? and aid=?)");
+        $check_like->bind_param("si", $cur_user, $aid);
+        $check_like->execute();
+        $check_like->bind_result($isliked);
+        $check_like->fetch();
+        $check_like->close();
+
+        $like_img_path = $isliked ? "../framework/bootstrap-icons-1.8.1/hand-thumbs-up-fill.svg" : "../framework/bootstrap-icons-1.8.1/hand-thumbs-up.svg";
+
         if ($best == 1) {
             $hd = "hidden";
         } else {
@@ -38,10 +49,10 @@ if ($stmt = $mysqli->prepare($sql)) {
                     <div class="post_time d-flex gap-lg-5">
                         <div class="p-2 user_post">$a_user</div>
                         <div class="p-2 time_post">$a_time</div>
-                        <button type="button" class="btn btn-default" id="like_$aid" style="height: 40px;vertical-align:middle;">
+                        <button type="button" class="btn btn-default thumb_ups_cls" id="like_$aid" style="height: 40px;vertical-align:middle;">
                             <div class="d-flex gap-1">
-                                <img src="../framework/bootstrap-icons-1.8.1/hand-thumbs-up.svg" alt="like number">
-                                <div class="p-0">$thumb_ups</div>
+                                <img src=$like_img_path alt="like number">
+                                <div class="p-0" id="thumb_ups_$aid">$thumb_ups</div>
                             </div>
                         </button>
                         <button type="button" class="btn btn-default" id="best_$aid" style="height: 40px;vertical-align:middle;">
@@ -59,4 +70,5 @@ if ($stmt = $mysqli->prepare($sql)) {
 
     $stmt->close();
     $mysqli->close();
+    $check_like_sqli->close();
 }
