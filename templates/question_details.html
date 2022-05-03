@@ -71,6 +71,24 @@
     </div>
 </div>
 
+<div class="modal fade" id="delcfmModel">
+    <div class="modal-dialog">
+        <div class="modal-content message_align">
+            <div class="modal-header">
+                <h4 class="modal-title">Confirm deletion</h4>
+            </div>
+            <div class="modal-body">
+                <p id="delcfmMsg">Are you sure to delete this answer?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-bs-dismiss="modal">No</button>
+                <a class="btn btn-success" data-bs-dismiss="modal" id="btnOkDelete" >Yes</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div id="a_alert_dummy"></div>
 
 </body>
@@ -253,6 +271,12 @@
         });
     })
 
+    body_obj.on("click", ".a_delete_btn", function (){
+        $('#delcfmModel').modal({ backdrop: 'static', keyboard: false })
+            .on('click', '#btnOkDelete', function() {
+
+            });
+    })
 
 </script>
 

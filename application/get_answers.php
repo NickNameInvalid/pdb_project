@@ -45,7 +45,7 @@ if ($stmt = $mysqli->prepare($sql)) {
             <div class="card mb-3">
                 <div class="card-body">
                     <p class="p-2 aid" hidden>$aid</p>
-                    <p class="card-text detail_body" contenteditable="false" id="answer_body_$aid">$a_body</p>
+                    <p class="card-text detail_body preview_body" contenteditable="false" id="answer_body_$aid">$a_body</p>
                     <div class="post_time d-flex gap-lg-5">
                         <div class="p-2 user_post">$a_user</div>
                         <div class="p-2 time_post">$a_time</div>
@@ -60,9 +60,12 @@ if ($stmt = $mysqli->prepare($sql)) {
                                 <img src=$best_answer alt="best answer status" id="best_img_$aid">
                                 <p class="p-2" id="is_best_$aid" hidden>$best</p>
                         </button>
-                        <button type="button" class="btn btn-default a_edit_btn preview_body" id="edit_$aid" style="height: 40px;vertical-align:middle;$editable">
+                        <button type="button" class="btn btn-default a_edit_btn" id="edit_$aid" style="height: 40px;vertical-align:middle;$editable">
                             <img src="../framework/bootstrap-icons-1.8.1/pencil-square.svg" alt="edit answer" id="edit_img_$aid">
                             <p class="p-2" id="editting_$aid" hidden>0</p>
+                        </button>
+                        <button type="button" class="btn btn-default a_delete_btn" id="delete_$aid" style="height: 40px;vertical-align:middle;$editable" data-bs-target="#delcfmModel" data-bs-toggle="modal">
+                            <img src="../framework/bootstrap-icons-1.8.1/trash.svg" alt="delete" id="delete_img_$aid">
                         </button>
                     </div>
                 </div>
