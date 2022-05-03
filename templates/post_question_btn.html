@@ -108,12 +108,25 @@
 
     $('#btn_post_question').on("click", function () {
         var object = document.getElementById('post_s_sel');
+        var g_obj = document.getElementById('post_g_sel');
+        let title_val = $('#question_title').val();
+        if(g_obj.selectedIndex === 0)
+        {
+            alert("Please select a general topic!");
+            return;
+        }
+        if(title_val.length === 0)
+        {
+            alert("Please input your question title!");
+            return;
+        }
+
         if(!$('#post_s_sel').is(':disabled'))
         {
             $.ajax({
                 url: "../application/post_new_question.php",
                 type: "post",
-                data: {"stid": object.options[object.selectedIndex].className.replace('stid_', ''), "title": $('#question_title').val(), "body": $('#question_body').val()},
+                data: {"stid": object.options[object.selectedIndex].className.replace('stid_', ''), "title": title_val, "body": $('#question_body').val()},
                 success: function (data) {
                     $('#post_question_model').modal('toggle');
                     $('#alert_dummy').html(data);

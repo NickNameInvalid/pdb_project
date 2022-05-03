@@ -4,10 +4,12 @@ session_start();
 $mysqli = establish_conn();
 $gtid = $_GET['gtid'] ?? "dft";
 $stid = $_GET['stid'] ?? "dft";
-$keywd = $_GET['key'] ?? "";
+$keywd = htmlspecialchars_decode($_GET['key'] ?? "");
 $stype = $_GET['stype'] ?? "dft";
 $params = Array();
 $param_type = "";
+if($stype != "qs" or $stype != "as")
+    $stype = "qs";
 if(empty($keywd))
 {
     if($stype == "dft" || $stype == "qs") {
