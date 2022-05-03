@@ -19,7 +19,7 @@ if ($body == null) {
 
 $sql = "INSERT INTO Answers (qid, a_username, a_body) VALUES (?, ?, ?)";
 
-$stmt = $mysqli->prepare();
+$stmt = $mysqli->prepare($sql);
 $stmt->bind_param("iss", $qid, $user, $body);
 try
 {
@@ -33,3 +33,5 @@ catch (mysqli_sql_exception $e)
     $mysqli->close();
     $stmt->close();
 }
+
+?>
