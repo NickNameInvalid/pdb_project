@@ -18,7 +18,7 @@ if($stid == "dft")
     return;
 }
 
-$stmt = $mysqli->prepare("INSERT INTO questions (q_username, stid, title, q_body) VALUES (?, ?, ?, ?)");
+$stmt = $mysqli->prepare("INSERT INTO Questions (q_username, stid, title, q_body) VALUES (?, ?, ?, ?)");
 $stmt->bind_param("siss", $user, $stid, $title, $body);
 try
 {
