@@ -186,13 +186,13 @@
     });
 
     body_obj.on("click", ".ba_btn", function (){
-        let aid = $(this).attr("id").replace("best_", "")
+        let aid = $(this).attr("id").replace("best_", "");
         let img_id = "#best_img_" + aid;
         let c_user = $("#username_tmp").text();
         let p_user = $("#q_user").text();
-        if(q_user !== c_user)
-        {
+        if(c_user !== p_user) {
             alert("You are not the question owner! You cannot edit the best answer!");
+            return;
         }
         let qid = $("#qid_tmp").text();
         let is_best_id = "#is_best_" + aid;
@@ -229,12 +229,13 @@
 
     $("#solve_q_btn").on("click", function (){
         let obj_tag = $("#q_status");
-        let solved = Number(obj_tag.text())
-        let p_user = $("#q_user").text();
+        let solved = Number(obj_tag.text());
         let c_user = $("#username_tmp").text();
-        if(q_user !== c_user)
+        let p_user = $("#q_user").text();
+        if(p_user !== c_user)
         {
             alert("You are not the question owner! You cannot set status for this question!");
+            return;
         }
         let qid = $("#qid_tmp").text();
         if(solved)
