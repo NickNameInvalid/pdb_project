@@ -37,6 +37,9 @@ if ($status == "unsolved") {
             where qid = ?";
 }
 
+$res = $status === "resolved" ? "unsolved" : "resolved";
+echo "<script>alert('Mark question as $res')</script>";
+
 $update = $myupdate->prepare($sql);
 $update->bind_param("i", $qid);
 $update->execute();

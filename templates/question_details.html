@@ -230,7 +230,6 @@
             success: function (data) {
                 $('#a_alert_dummy').html(data);
                 get_answer_detail();
-                // window.location.reload();
             },
             error: function (data){
                 console.warn(data);
@@ -275,6 +274,7 @@
             data: {'qid': qid, 'p_user': p_user},
             success: function (data) {
                 $('#a_alert_dummy').html(data);
+                get_question_detail();
                 // window.location.reload();
             },
             error: function (data){
