@@ -72,10 +72,10 @@ CREATE TABLE Questions (
 CREATE TABLE Answers (
   aid INT NOT NULL AUTO_INCREMENT,
   qid INT NOT NULL,
-  answer_time DATETIME NOT NULL,
+  answer_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   a_username VARCHAR(45) NOT NULL,
   a_body VARCHAR(100) NOT NULL,
-  thumb_ups INT NOT NULL,
+  thumb_ups INT NOT NULL DEFAULT 0,
   best_answer INT NOT NULL default 0,
   a_visible_status INT NOT NULL default 1,
   PRIMARY KEY (aid),
