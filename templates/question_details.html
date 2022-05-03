@@ -214,6 +214,26 @@
         }
     })
 
+    body_obj.on("click", ".a_edit_btn", function (){
+        let aid = $(this).attr("id").replace("edit_", "")
+        let img_id = "#edit_img_" + aid;
+        let edit_status_id = "#editting_" + aid;
+        let body_id = "#answer_body_" + aid;
+        let editting = Number($(edit_status_id).text())
+        if(editting)
+        {
+            $(edit_status_id).html(0);
+            $(img_id).attr("src", "../framework/bootstrap-icons-1.8.1/pencil-square.svg")
+            $(body_id).removeClass('edit_body').addClass('preview_body').attr("contenteditable", "false");
+        }
+        else
+        {
+            $(edit_status_id).html(1);
+            $(img_id).attr("src", "../framework/bootstrap-icons-1.8.1/save.svg")
+            $(body_id).removeClass('preview_body').addClass('edit_body').attr("contenteditable", "true");
+        }
+    });
+
 
     $('#btn_post_answer').on("click", function () {
         post_data = {}
