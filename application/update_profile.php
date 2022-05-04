@@ -12,18 +12,11 @@ $state = $_POST["state"];
 $profile = $_POST["profile"];
 $country = $_POST["country"];
 
-
-$sql_lock = "select * from users where username = ? for update";
 $sql = "update Users
         set firstname=?, lastname=?, email=?, phone=?, city=?, state=?, country=?, profile=?
         where username=?";
 
 try {
-    $lock = $mysqli->prepare($sql_lock);
-    $lock->bind_param("s", $user);
-    $lock->execute();
-    $lock->close();
-
     if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param("sssssssss", $firstname, $lastname, $email, $phone, $city, $state, $country, $profile, $user);
         $stmt->execute();
