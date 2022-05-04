@@ -33,7 +33,7 @@ if ($stmt->num_rows == 0) {
     $mysqli->query("create procedure 
             update_likes_0(in uname varchar(45), in id int) 
             begin 
-            select * from likes where username = uname and aid = id; 
+            select * from likes where username = uname and aid = id for update; 
             update Likes
             set like_status = 0
             where username = uname and aid = id; end;");
@@ -67,7 +67,7 @@ if ($stmt->num_rows == 0) {
     $mysqli->query("create procedure 
             update_likes_1(in uname varchar(45), in id int) 
             begin 
-            select * from likes where username = uname and aid = id; 
+            select * from likes where username = uname and aid = id for update; 
             update Likes
             set like_status = 1
             where username = uname and aid = id; end;");
