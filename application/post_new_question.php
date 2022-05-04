@@ -9,7 +9,7 @@ if (!isset($_SESSION['username']))
 
 $mysqli = establish_conn();
 $user = $_SESSION['username'];
-$stid = number_format($_POST['stid']);
+$stid = number_format($_POST['stid']) ?? "dft";
 $title = $_POST['title'] ?? "";
 $body = $_POST['body'] ?? "System remind: This user did not set a question body!";
 if($stid == "dft")

@@ -25,7 +25,7 @@ $stmt->bind_param("i", $aid);
 try
 {
     $stmt -> execute();
-    echo "<script>alert('Save answer successfully!')</script>";
+    echo "<script>alert('Delete answer successfully!')</script>";
 }
 catch (mysqli_sql_exception $e)
 {

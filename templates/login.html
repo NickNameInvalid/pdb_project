@@ -27,9 +27,11 @@
     </div>
 </form>
 </div>
+<div id="alert_dummy"></div>
+
 <script>
     $("#to_register").click(function (){
-        $(location).attr("href","register.html")
+        $(location).attr("href","register.html");
     })
 
     function login() {
@@ -38,13 +40,11 @@
             type: "post",
             data: $("#login_form").serialize(),
             success: function (data) {
-                if(data === "Success!")
-                {
-                    window.location.href = "../templates/main.html"
-                }
-                else
-                {
-                    alert(data);
+                if(data === 1) {
+                    window.location.href = "main.html";
+                } else {
+                    $('#alert_dummy').html(data);
+                    location.reload();
                 }
             },
             error: function (data){
