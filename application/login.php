@@ -6,9 +6,9 @@ $mysqli = establish_conn();
 $user = $_POST['login_user'];
 $pass = hash('sha256', $_POST['login_pass']);
 
-if(isset($_SESSION['username']))
+if(isset($_SESSION['username']) && $_SESSION['username'] == $user)
 {
-    echo "You've already login!";
+    echo "<script>alert('You have already logged in!')</script>";
     return;
 }
 
@@ -22,7 +22,6 @@ if($has == null) {
     echo "<script>alert('User Does not exist or password is incorrect!')</script>";
 } else {
     $_SESSION['username'] = $user;
-    echo 1;
 }
 
 $user_check->close();
