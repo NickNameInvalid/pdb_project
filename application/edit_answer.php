@@ -5,10 +5,10 @@ $mysqli = establish_conn();
 $aid = $_POST['aid'];
 $p_user = $_POST['p_user'];
 $body = $_POST['body'];
-$c_user = $_SESSION['username'] ?? "dft";
+$c_user = $_SESSION['username'] ?? "";
 $time = date('Y-m-d H:i:s');
 
-if ($c_user == "dft") {
+if ($c_user == "") {
     echo "<script>alert('You have not logged in!')</script>";
     return;
 }

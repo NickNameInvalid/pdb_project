@@ -5,7 +5,7 @@ $mysqli = establish_conn();
 $c_user = $_SESSION['username'] ?? "";
 $p_user = $_GET['p_user'] ?? "";
 
-if ($p_user == "dft") {
+if ($p_user == "") {
     return;
 }
 
