@@ -27,6 +27,7 @@ $stmt->execute();
 $stmt->bind_result($status);
 $stmt->fetch();
 
+$sql_lock = "select * from questions where qid = ? for update";
 if ($status == "unsolved") {
     $sql = "update Questions 
             set status = 'resolved'
@@ -39,6 +40,11 @@ if ($status == "unsolved") {
 
 $res = $status === "resolved" ? "unsolved" : "resolved";
 echo "<script>alert('Mark question as $res')</script>";
+
+$lock = $myupdate->prepare($sql_lock);
+$lock->bind_param("i", $qid);
+$lock->execute();
+$lock->close();
 
 $update = $myupdate->prepare($sql);
 $update->bind_param("i", $qid);

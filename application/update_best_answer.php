@@ -30,19 +30,34 @@ $stmt->fetch();
 
 // if we have a current best, set it to 0
 if ($cur_best != null) {
+    $sql_lock_0 = "select * from Answers where aid = ? for update";
     $sql = "update Answers 
             set best_answer = 0
             where aid = ?";
+
+    $lock_0 = $myupdate->prepare($sql_lock_0);
+    $lock_0->bind_param("i", $cur_best);
+    $lock_0->execute();
+    $lock_0->close();
+
     $update = $myupdate->prepare($sql);
     $update->bind_param("i", $cur_best);
     $update->execute();
+
 }
 
 // if we do not have a current best or the current best is not the clicked one, set the clicked one to 1
 if ($cur_best == null || $cur_best != $aid) {
+    $sql_lock_1 = "select * from Answers where aid = ? for update";
     $sql = "update Answers 
             set best_answer = 1
             where aid = ?";
+
+    $lock_1 = $myupdate->prepare($sql_lock_1);
+    $lock_1->bind_param("i", $aid);
+    $lock_1->execute();
+    $lock_1->close();
+
     $update = $myupdate->prepare($sql);
     $update->bind_param("i", $aid);
     $update->execute();

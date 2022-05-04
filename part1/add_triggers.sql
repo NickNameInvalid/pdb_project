@@ -11,6 +11,7 @@ delimiter //
 -- for Likes
 create trigger Likes_after_insert after insert on Likes for each row
 begin
+	select * from Answers where aid = new.aid for update;
 	update Answers
     set thumb_ups = thumb_ups + 1
     where aid = new.aid;
@@ -19,6 +20,7 @@ end;//
 create trigger Likes_after_update after update on Likes for each row
 begin
 	if new.like_status <> old.like_status then
+    	select * from Answers where Answers.aid = new.aid for update;
 		if new.like_status = 0 and old.like_status = 1 then 
 			update Answers
 			set thumb_ups = thumb_ups - 1
@@ -34,6 +36,7 @@ end;//
 -- for Answers
 create trigger Answers_after_insert after insert on Answers for each row
 begin
+	select * from users where users.username = new.a_username for update;
 	update Users
     set karma_points = karma_points + 10
     where Users.username = new.a_username;
@@ -42,6 +45,7 @@ end;//
 create trigger Answers_after_update after update on Answers for each row
 begin
 	if new.best_answer <> old.best_answer then
+    	select * from users where users.username = new.a_username for update;
 		if new.best_answer = 1 and old.best_answer = 0 then
 			update Users
 			set karma_points = karma_points + 20
@@ -74,6 +78,7 @@ begin
 	declare acvanced_status INT;
 	declare expert_status INT;
     if new.karma_points <> old.karma_points then
+		select * from userstatus where UserStatus.username = new.username for update;
 		select statusid into basic_status from status where statusname = 'basic';
 		select statuskarma, statusid into advance_thres, acvanced_status from status where statusname = 'advanced';
 		select statuskarma, statusid into expert_thres, expert_status from status where statusname = 'expert';
