@@ -4,6 +4,16 @@
     border-color: darkblue;
 }
 
+#st_topics:hover {
+    cursor: pointer;
+    color: #007bff;
+}
+
+#gt_topics:hover {
+    cursor: pointer;
+    color: #007bff;
+}
+
 .user_post
 {
     color:#007bff;

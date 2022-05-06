@@ -22,7 +22,11 @@
             <div class="post_time d-flex gap-lg-5">
                 <div class="p-2 user_post" id="q_user">user</div>
                 <div class="p-2 time_post" id="q_time">time</div>
-                <div class="p-2 post_topics" id="q_topics">g_topic \ s_topic</div>
+                <div class="d-flex">
+                    <div class="p-2 post_topics" id="gt_topics"></div>
+                    <div class="p-2 post_topics" id="divider_topics"> \ </div>
+                    <div class="p-2 post_topics" id="st_topics"></div>
+                </div>
                 <button type="button" class="btn btn-default" id="solve_q_btn" style="height: 40px;vertical-align:middle;">
                     <img src="../framework/bootstrap-icons-1.8.1/check-square.svg" alt="solve status" id="img_solve">
                     <div class="p-0 question_status" id="q_status" hidden></div>
@@ -52,6 +56,8 @@
 </div>
 
 <p hidden id="qid_tmp"></p>
+<p hidden id="stid_tmp"></p>
+<p hidden id="gtid_tmp"></p>
 
 <div class="modal fade" id="answer_question_model" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
     <div class="modal-dialog">
@@ -134,9 +140,12 @@
                 $("#q_body").html(data_json.q_body);
                 $("#q_user").html(data_json.q_user);
                 $("#q_time").html(data_json.q_time);
-                $("#q_topics").html(data_json.q_topics);
+                $("#st_topics").html(data_json.st_topics);
+                $("#gt_topics").html(data_json.gt_topics);
                 $("#q_status").html(data_json.q_status);
                 $("#edit_status").html(0);
+                $("#stid_tmp").html(data_json.s_tid);
+                $("#gtid_tmp").html(data_json.g_tid);
                 $("#edit_q_btn").attr("style",data_json.editable ? "display:block;" : "display:none;");
                 $("#img_solve").attr("src", data_json.q_status === "resolved" ? "../framework/bootstrap-icons-1.8.1/check-square.svg" : "../framework/bootstrap-icons-1.8.1/x-square.svg")
             },
@@ -145,6 +154,14 @@
             }
         });
     }
+
+    $("#st_topics").on("click", function (){
+        window.location.href = "../templates/main.html?stid=" + $("#stid_tmp").text();
+    })
+
+    $("#gt_topics").on("click", function (){
+        window.location.href = "../templates/main.html?gtid=" + $("#gtid_tmp").text();
+    })
 
     function get_answer_detail()
     {
