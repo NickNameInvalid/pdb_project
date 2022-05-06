@@ -67,9 +67,9 @@ else
     if($stype === "dft" || $stype === "qs") {
         $sql_text = <<<dochere
         select qid, q_username, concat(gtname, ' / ', stname) as topics , title, q_body, post_time, status from(
-        select qid, q_username, title, q_body, post_time, match (q_body) against (? with query expansion) as score, 0.0 as weight, stid, status, q_visible_status from questions
+        select qid, q_username, title, q_body, post_time, match (q_body) against (? in natural language mode) as score, 0.0 as weight, stid, status, q_visible_status from questions
         union
-        select qid, q_username, title, q_body, post_time, match (title) against (? with query expansion) as score, 0.0 as weight, stid, status, q_visible_status from questions
+        select qid, q_username, title, q_body, post_time, match (title) against (? in natural language mode) as score, 0.0 as weight, stid, status, q_visible_status from questions
         union
         select qid, q_username, title, q_body, post_time, 0.0 as score, 0.6 as weight, stid, status, q_visible_status from questions where title like ?
         union
@@ -110,7 +110,7 @@ else
     else if ($stype === "as"){
         $sql_text = <<<dochere
         select aid, qid, concat(gtname, ' / ', stname) as topics, a_username, title, a_body, thumb_ups, answer_time, best_answer from(
-        select aid, qid, a_username, a_body, thumb_ups, answer_time, best_answer, match (a_body) against (? with query expansion) as score, 0.0 as weight, a_visible_status from answers
+        select aid, qid, a_username, a_body, thumb_ups, answer_time, best_answer, match (a_body) against (? in natural language mode) as score, 0.0 as weight, a_visible_status from answers
         union
         select aid, qid, a_username, a_body, thumb_ups, answer_time, best_answer, 0.0 as score, 1.0 as weight, a_visible_status from answers where a_body like ?
         ) as a natural join questions natural join subjecttopics natural join generaltopics where a_visible_status = 1
